@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #faefd7;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        .signature {
+            font-family: times, sans-serif;
+            color: black;
+            line-height: 1.4;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .signature table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .signature td {
+            padding: 0;
+            vertical-align: top;
+        }
+        
+        .main-container {
+            background-color: #faefd7;
+            padding: 25px;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .content-table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .logo-cell {
+            padding-right: 40px;
+            width: auto;
+            text-align: center;
+        }
+        
+        .logo {
+            width: auto;
+            height: auto;
+            max-height: 380px;
+            max-width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .content-cell {
+            padding-left: 30px;
+        }
+        
+        .company {
+            font-size: 32px;
+            font-weight: bold;
+            color: #063b40;
+            margin: 0 0 5px 5px;
+        }
+        
+        .profession {
+            font-size: 26px;
+            color: #555;
+            margin: 0 0 15px 5px;
+        }
+        
+        .contact-info {
+            font-size: 22px;
+            color: #555;
+            margin: 0;
+        }
+        
+        .contact-info div {
+            margin: 2px 0 2px 5px;
+        }
+        
+        .contact-info a {
+            color: #2d5f4f;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile styles */
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .signature {
+                max-width: 100%;
+            }
+            
+            .main-container {
+                padding: 18px;
+            }
+            
+            .content-table tr {
+                display: block;
+                width: 100%;
+            }
+            
+            .logo-cell {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 0 0 20px 0;
+            }
+            
+            .content-cell {
+                display: block;
+                width: 100%;
+                padding: 0;
+                text-align: center;
+            }
+            
+            .logo {
+                max-height: 200px;
+                margin: 0 auto;
+            }
+            
+            .company {
+                font-size: 28px;
+                text-align: center;
+                margin: 0 0 8px 0;
+            }
+            
+            .profession {
+                font-size: 22px;
+                text-align: center;
+                margin: 0 0 18px 0;
+            }
+            
+            .contact-info {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .contact-info div {
+                margin: 5px 0;
+            }
+        }
+        
+        /* Very small screens */
+        @media screen and (max-width: 400px) {
+            .company {
+                font-size: 24px;
+            }
+            
+            .profession {
+                font-size: 20px;
+            }
+            
+            .contact-info {
+                font-size: 18px;
+            }
+            
+            .logo {
+                max-height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signature">
+        <table>
+            <tr>
+                <td class="main-container">
+                    <table class="content-table">
+                        <tr>
+                            <td class="logo-cell">
+                                <img src="daandouwebouwen.svg" alt="Daan Douwe Bouwen" class="logo">
+                            </td>
+                            <td class="content-cell">
+                                <div class="company">Daan Douwe Bouwen</div>
+                                <div class="profession">Timmerman & Aannemer</div>
+                                <div class="contact-info">
+                                    <div>T: <a href="tel:+31649307365">+31 6 49 30 73 65</a></div>
+                                    <div>E: <a href="mailto:bouwen@daandouwe.com">bouwen@daandouwe.com</a></div>
+                                    <div>W: <a href="https://www.daandouwe.com/bouwen">www.daandouwe.com/bouwen</a></div>
+                                    <div>Amsterdam, Nederland</div>
+                                    <div>KvK: 97741256</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
