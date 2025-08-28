@@ -38,6 +38,9 @@
         <meta name="twitter:title" content="Daam Douwe Bouwen">
         <meta name="twitter:description" content="Daan Douwe van Stigt - I build things">
         <meta name="twitter:image" content="logo.png">
+
+        <!-- Your existing head content -->
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     </head>
 
     <style>
@@ -117,22 +120,22 @@
             margin: 0 0 15px 5px;
         }
         
-        .contact-info {
+        .contact {
             font-size: 22px;
             color: #555;
             margin: 0;
         }
         
-        .contact-info div {
+        .contact div {
             margin: 2px 0 2px 5px;
         }
         
-        .contact-info a {
+        .contact a {
             color: #2d5f4f;
             text-decoration: none;
         }
         
-        .contact-info a:hover {
+        .contact a:hover {
             text-decoration: underline;
         }
         
@@ -186,12 +189,12 @@
                 margin: 0 0 18px 0;
             }
             
-            .contact-info {
+            .contact {
                 font-size: 20px;
                 text-align: center;
             }
             
-            .contact-info div {
+            .contact div {
                 margin: 5px 0;
             }
         }
@@ -206,7 +209,7 @@
                 font-size: 20px;
             }
             
-            .contact-info {
+            .contact {
                 font-size: 18px;
             }
             
@@ -229,13 +232,30 @@
                             <td class="content-cell">
                                 <div class="company">Daan Douwe Bouwen</div>
                                 <div class="profession">Timmerman & Aannemer</div>
-                                <div class="contact-info">
-                                    <div>T: <a href="tel:+31649307365">+31 6 49 30 73 65</a></div>
-                                    <div>E: <a href="mailto:bouwen@daandouwe.com">bouwen@daandouwe.com</a></div>
-                                    <div>W: <a href="https://www.daandouwe.com/bouwen">www.daandouwe.com/bouwen</a></div>
-                                    <div>Amsterdam, Nederland</div>
-                                    <div>KvK: 97741256</div>
+                                <div class="contact">
+                                    <!-- Turnstile widget -->
+                                    <div class="cf-turnstile" 
+                                        data-sitekey="YOUR_SITE_KEY_HERE"
+                                        data-callback="onTurnstileSuccess">
+                                    </div>
+                                    <div id="contact-info" style="display: none;"></div>
+                                        <div>Amsterdam, Nederland</div>
+                                        <div>E: <a href="mailto:bouwen@daandouwe.com">bouwen@daandouwe.com</a></div>
+                                        <div>KvK: 97741256</div>
+                                    </div>
                                 </div>
+                                <script>
+                                    function onTurnstileSuccess(token) {
+                                        // Show contact info when Turnstile is completed
+                                        document.getElementById('contact-info').style.display = 'block';
+                                        
+                                        // Optional: Hide the Turnstile widget after success
+                                        document.querySelector('.cf-turnstile').style.display = 'none';
+                                        
+                                        // Optional: Verify the token with your server
+                                        // verifyTurnstileToken(token);
+                                    }
+                                </script>
                             </td>
                         </tr>
                     </table>
