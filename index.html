@@ -18,6 +18,16 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="I build with code and wood">
     <meta name="author" content="Daan Douwe van Stigt">
+    <meta name="language" content="Dutch">
+    <meta name="geo.region" content="NL">
+    <meta name="geo.placename" content="Amsterdam">
+
+    <!-- Preload important resources -->
+    <link rel="preload" href="main1.css" as="style">
+    <link rel="preload" href="/favicon-32x32.png" as="image">
+
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
     
     <!-- Open Graph / Social Media (WhatsApp, Facebook, etc.) -->
     <meta property="og:title" content="Daan Douwe van Stigt">
@@ -36,6 +46,13 @@
     <meta name="twitter:image" content="favicon.png">
     <meta name="keywords" content="Daan Douwe, developer, builder, carpentry, software, projects, portfolio">
 
+    <!-- Preload important resources -->
+    <link rel="preload" href="main1.css" as="style">
+    <link rel="preload" href="/favicon-32x32.png" as="image">
+
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHPE5YBVPT"></script>
     <script>
@@ -45,7 +62,7 @@
 
       gtag('config', 'G-DHPE5YBVPT');
     </script>
-
+    
     <!-- Structured Data for Google -->
     <script type="application/ld+json">
     {
@@ -61,7 +78,11 @@
     }
     </script>
 </head>
-
+<style>
+  body {
+      cursor: url('favicon-32x32.png'), auto;
+  }
+</style>
 
 <body bgcolor=black>
 <font style="font-family:times;font-size:64px;">

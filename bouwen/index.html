@@ -22,6 +22,11 @@
         <!-- SEO Meta Tags -->
         <meta name="description" content="Daan Douwe van Stigt - I build things">
         <meta name="author" content="Daan Douwe van Stigt">
+        <link rel="canonical" href="https://daandouwe.com">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="Dutch">
+        <meta name="geo.region" content="NL">
+        <meta name="geo.placename" content="Amsterdam">
         
         <!-- Open Graph / Social Media (WhatsApp, Facebook, etc.) -->
         <meta property="og:title" content="Daan Douwe Bouwen">
@@ -39,8 +44,30 @@
         <meta name="twitter:description" content="Daan Douwe van Stigt - I build things">
         <meta name="twitter:image" content="logo.png">
 
+        <!-- Preload important resources -->
+        <link rel="preload" href="main1.css" as="style">
+        <link rel="preload" href="/favicon-32x32.png" as="image">
+
+        <!-- DNS prefetch for external resources -->
+        <link rel="dns-prefetch" href="//www.google-analytics.com">
+
         <!-- Your existing head content -->
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Daan Douwe Bouwen",
+              "description": "Timmerman & Aannemer",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Amsterdam",
+                "addressCountry": "NL"
+              },
+              "url": "https://daandouwe.com/bouwen"
+            }
+            </script>
     </head>
 
     <style>
