@@ -79,16 +79,91 @@
     </script>
 </head>
 <style>
-  body {
-      cursor: url('favicon-32x32.png'), auto;
+  /* body {
+      cursor: url('cursor.png'), auto;
+  } */
+  body { cursor: none; }
+
+  .cursor-container {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+  }
+
+  .spinning-dd-cursor {
+      width: 40px;
+      height: 30px;
+      display: flex;
+      animation: spinY 2s linear infinite;
+      transform-style: preserve-3d;
+  }
+
+  .d-letter {
+      width: 20px;
+      height: 30px;
+      background-color: #e91ee6;
+      position: relative;
+  }
+
+  .left-d {
+      border-radius: 0 15px 15px 0;
+  }
+
+  .left-d::before {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 22px;
+      background-color: white;
+      right: 0;
+      top: 4px;
+      border-radius: 0 11px 11px 0;
+  }
+
+  .right-d {
+      border-radius: 15px 0 0 15px;
+      transform: scaleX(-1);
+  }
+
+  .right-d::before {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 22px;
+      background-color: white;
+      right: 0;
+      top: 4px;
+      border-radius: 0 11px 11px 0;
+  }
+
+  @keyframes spinY {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
   }
 </style>
 
 <body bgcolor=black>
 <font style="font-family:times;font-size:64px;">
 <body style="word-wrap: initial;">
-
+  <div class="cursor-container" id="cursor">
+    <div class="spinning-dd-cursor">
+        <div class="d-letter left-d"></div>
+        <div class="d-letter right-d"></div>
+    </div>
+</div>
 </body>
+<script>
+  if (!('ontouchstart' in window)) {
+      const cursor = document.getElementById('cursor');
+      document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+      });
+  }
+  </script>
 
 <font style="font-family:times;font-size:64px;">
 </font>
