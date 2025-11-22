@@ -30,7 +30,7 @@ body {
 
 .signature td {
   padding: 0;
-  vertical-align: top;
+  vertical-align: middle; /* Changed to middle for better alignment */
 }
 
 .main-container {
@@ -48,7 +48,7 @@ body {
 }
 
 .logo-col {
-  width: 400px;
+  width: 450px; /* Increased width for portrait images */
   text-align: center;
   padding: 0;
 }
@@ -56,15 +56,16 @@ body {
 .logo {
   width: 100%;
   height: auto;
-  max-height: 700px;
+  max-height: 650px; /* Limit height */
   border-radius: 8px;
   display: block;
   object-fit: contain;
+  margin: 0 auto;
 }
 
 .content-cell {
   padding: 0;
-  vertical-align: middle; /* Centers content vertically next to image */
+  vertical-align: middle;
 }
 
 .company {
@@ -107,7 +108,11 @@ body {
   }
   
   .logo-col {
-    width: 300px;
+    width: 350px;
+  }
+  
+  .logo {
+    max-height: 500px;
   }
   
   .company {
@@ -154,7 +159,7 @@ body {
   }
   
   .logo {
-    max-height: 450px;
+    max-height: 500px;
     max-width: 90%;
     margin: 0 auto;
   }
@@ -196,6 +201,6 @@ body {
   }
   
   .logo {
-    max-height: 350px;
+    max-height: 400px;
   }
 }
