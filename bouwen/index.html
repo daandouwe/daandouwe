@@ -295,5 +295,44 @@
             </tr>
         </table>
     </div>
+    <div id="imageRotator">
+        <img id="rotatingImage" src="" alt="Rotating images" style="max-width: 100%; height: auto;">
+      </div>
+
+      <script>
+        // List your image filenames here
+        const images = [
+        'images/image1.jpg',
+        'images/image2.jpg',
+        'images/image3.jpg',
+        'images/image4.jpg',
+        'images/image5.jpg',
+        'images/image6.jpg',
+        'images/image7.jpg',
+        'images/image8.jpg',
+        'images/image9.jpg',
+        'images/image10.jpg',
+        'images/image11.jpg',
+        'images/image12.jpg',
+        'images/image13.jpg',
+        'images/image14.jpg',
+        'images/image15.jpg',
+        ];
+
+        let currentIndex = 0;
+        const imgElement = document.getElementById('rotatingImage');
+
+        // Function to change image
+        function rotateImage() {
+          imgElement.src = images[currentIndex];
+          currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Show first image immediately
+        rotateImage();
+
+        // Rotate every 6 seconds
+        setInterval(rotateImage, 6000);
+      </script>A
 </body>
 </html>
