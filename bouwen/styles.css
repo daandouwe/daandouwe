@@ -35,6 +35,8 @@ body {
 }
 .content-col {
   margin-left: 50px;
+  width: 525px; /* Fixed width to accommodate your images */
+  min-width: 525px; /* Prevent shrinking */
 }
 /* Logo */
 .logo {
