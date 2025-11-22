@@ -69,6 +69,42 @@
             }
             </script>
     </head>
+    <script>
+        // List your image filenames here
+        const images = [
+        'logo.svg',
+        'image1.jpg',
+        'image2.jpg',
+        'image3.jpg',
+        'image4.jpg',
+        'image5.jpg',
+        'image6.jpg',
+        'image7.jpg',
+        'image8.jpg',
+        'image9.jpg',
+        'image10.jpg',
+        'image11.jpg',
+        'image12.jpg',
+        'image13.jpg',
+        'image14.jpg',
+        'image15.jpg',
+        ];
+
+        let currentIndex = 0;
+        const imgElement = document.getElementById('rotatingImage');
+
+        // Function to change image
+        function rotateImage() {
+          imgElement.src = images[currentIndex];
+          currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        // Show first image immediately
+        rotateImage();
+
+        // Rotate every 6 seconds
+        setInterval(rotateImage, 5000);
+    </script>
 
     <style>
         body {
@@ -258,7 +294,7 @@
                     <table class="content-table">
                         <tr>
                             <td class="logo-cell">
-                                <img src="logo.svg" alt="Daan Douwe Bouwen" class="logo">
+                                <img id="rotatingImage" src="" alt="Daan Douwe Bouwen" class="logo">
                             </td>
                             <td class="content-cell">
                                 <div class="company">Daan Douwe Bouwen</div>
@@ -291,48 +327,11 @@
                             </td>
                         </tr>
                     </table>
+
                 </td>
             </tr>
         </table>
     </div>
-    <div id="imageRotator">
-        <img id="rotatingImage" src="" alt="Rotating images" style="max-width: 100%; height: auto;">
-      </div>
 
-      <script>
-        // List your image filenames here
-        const images = [
-        'image1.jpg',
-        'image2.jpg',
-        'image3.jpg',
-        'image4.jpg',
-        'image5.jpg',
-        'image6.jpg',
-        'image7.jpg',
-        'image8.jpg',
-        'image9.jpg',
-        'image10.jpg',
-        'image11.jpg',
-        'image12.jpg',
-        'image13.jpg',
-        'image14.jpg',
-        'image15.jpg',
-        ];
-
-        let currentIndex = 0;
-        const imgElement = document.getElementById('rotatingImage');
-
-        // Function to change image
-        function rotateImage() {
-          imgElement.src = images[currentIndex];
-          currentIndex = (currentIndex + 1) % images.length;
-        }
-
-        // Show first image immediately
-        rotateImage();
-
-        // Rotate every 6 seconds
-        setInterval(rotateImage, 6000);
-      </script>
 </body>
 </html>
