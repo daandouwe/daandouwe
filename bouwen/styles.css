@@ -66,7 +66,7 @@ body {
 .content-cell {
   padding: 0;
   vertical-align: middle;
-  text-align: left;
+  text-align: center;   /* was left */
 }
 
 .company {
@@ -75,14 +75,14 @@ body {
   color: #063B40;
   margin: 0 0 10px 0;
   line-height: 1.2;
-  text-align: left;
+  text-align: center;   /* was left */
 }
 
 .profession {
   font-size: 22px;
   color: #555;
   margin: 0 0 20px 0;
-  text-align: left;
+  text-align: center;   /* was left */
 }
 
 .contact {
@@ -90,7 +90,7 @@ body {
   color: #555;
   margin: 0;
   line-height: 1.8;
-  text-align: left;
+  text-align: center;   /* was left */
 }
 
 .contact div {
