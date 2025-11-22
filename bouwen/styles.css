@@ -66,6 +66,7 @@ body {
 .content-cell {
   padding: 0;
   vertical-align: middle;
+  text-align: left;
 }
 
 .company {
@@ -73,24 +74,27 @@ body {
   font-weight: bold;
   color: #063B40;
   margin: 0 0 10px 0;
-  line-height: 1.3;
+  line-height: 1.2;
+  text-align: left;
 }
 
 .profession {
   font-size: 22px;
   color: #555;
   margin: 0 0 20px 0;
+  text-align: left;
 }
 
 .contact {
   font-size: 18px;
   color: #555;
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.8;
+  text-align: left;
 }
 
 .contact div {
-  margin: 4px 0;
+  margin: 2px 0;
 }
 
 .contact a {
@@ -175,7 +179,7 @@ body {
   }
   
   .contact div {
-    margin: 4px 0;
+    margin: 2px 0;
   }
 }
 
