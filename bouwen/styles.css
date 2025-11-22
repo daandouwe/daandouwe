@@ -1,0 +1,108 @@
+/* Base / reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: #F7ECD6;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  cursor: url("./cursor.png"), auto;
+  font-family: "Lora", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #111;
+}
+
+/* Layout shell (replaces table layout; visual stays the same) */
+.wrapper { width: 100%; max-width: 800px; }
+.card {
+  background: #F7ECD6;
+  padding: 25px;
+  border-radius: 8px;
+  width: 100%;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 400px 1fr; /* Fixed width for logo column */
+  column-gap: 40px;
+  align-items: start;
+}
+
+/* Columns */
+.logo-col { 
+  text-align: center;
+  width: 400px; /* Fixed width */
+  min-width: 400px; /* Prevent shrinking */
+}
+.content-col {
+  margin-left: 10px;
+}
+/* Logo */
+.logo {
+  display: block;
+  width: 100%; /* Fill the column width */
+  height: auto;
+  max-height: 700px;
+  border-radius: 8px;
+  object-fit: contain; /* Keep aspect ratio */
+}
+
+/* Typography */
+.brand {
+    margin: 8px 0 5px 5px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #063B40;
+  
+    /* keep on one line on desktop/tablet */
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    letter-spacing: -0.01em;
+  }
+.tagline {
+  margin: 0 0 15px 5px;
+  font-size: 26px;
+  color: #555;
+}
+.contact {
+  font-size: 22px;
+  color: #555;
+}
+.contact-info { margin-top: 6px; }
+.contact-info > div { margin: 2px 0 2px 5px; }
+
+a { color: #2d5f4f; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Respect hidden attribute */
+[hidden] { display: none !important; }
+
+/* Mobile (≤600px) */
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .card { padding: 18px; }
+  .layout { grid-template-columns: 1fr; row-gap: 20px; }
+  .logo-col { 
+    text-align: center;
+    width: auto; /* Remove fixed width on mobile */
+    min-width: auto; /* Remove min-width on mobile */
+  }
+  .logo { max-height: 450px; margin: 0 auto; }
+  .brand {
+    white-space: normal;
+    margin: -4px 0 8px 0;
+    text-align: center;
+    font-size: 28px;
+  }
+  .tagline { font-size: 22px; margin: 0 0 18px 0; text-align: center; }
+  .contact { font-size: 20px; text-align: center; }
+  .contact-info > div { margin: 5px 0; }
+}
+
+/* Very small (≤400px) */
+@media (max-width: 400px) {
+  .brand { font-size: 24px; }
+  .tagline { font-size: 20px; }
+  .contact { font-size: 18px; }
+  .logo { max-height: 320px; }
+}
