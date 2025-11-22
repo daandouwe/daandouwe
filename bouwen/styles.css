@@ -1,103 +1,183 @@
-/* Base / reset */
-*, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; }
 body {
-  margin: 0;
-  background: #F7ECD6;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  cursor: url("./cursor.png"), auto;
-  font-family: "Lora", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #111;
+  cursor: url('./cursor.png'), auto;
 }
 
-/* Layout shell (replaces table layout; visual stays the same) */
-.wrapper { width: 100%; max-width: 1200px; }
-.card {
-  background: #F7ECD6;
+body {
+  background-color: #F7ECD6;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.signature {
+  font-family: times, sans-serif;
+  color: black;
+  line-height: 1.4;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.signature table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.signature td {
+  padding: 0;
+  vertical-align: top;
+}
+
+.main-container {
+  background-color: #F7ECD6;
   padding: 25px;
   border-radius: 8px;
   width: 100%;
-}
-.layout {
-  display: grid;
-  grid-template-columns: 525px 1fr; /* Match the actual logo-col width */
-  column-gap: 50px; /* This controls the spacing between columns */
-  align-items: start;
+  box-sizing: border-box;
 }
 
-/* Columns */
-.logo-col { 
+.content-table {
+  border-spacing: 50px 0; /* 50px horizontal spacing, 0 vertical */
+  border-collapse: separate; /* Changed from collapse to separate */
+  width: 100%;
+}
+
+.logo-col {
+  width: 525px;
+  min-width: 525px;
   text-align: center;
-  /* Remove width/min-width - grid handles this */
-}
-.content-col {
-  /* Remove width/min-width and margins - grid handles this */
+  padding: 0;
 }
 
-/* Logo */
 .logo {
-  display: block;
-  width: 100%; /* Fill the column width */
+  width: 100%;
   height: auto;
   max-height: 700px;
   border-radius: 8px;
-  object-fit: contain; /* Keep aspect ratio */
+  display: block;
+  object-fit: contain;
 }
 
-/* Typography */
-.brand {
-    margin: 8px 0 5px 5px;
-    font-size: 32px;
-    font-weight: 600;
-    color: #063B40;
-  
-    /* keep on one line on desktop/tablet */
-    white-space: nowrap;
-    overflow-wrap: normal;
-    word-break: keep-all;
-    letter-spacing: -0.01em;
-  }
-.tagline {
-  margin: 0 0 15px 5px;
+.content-cell {
+  padding: 0;
+}
+
+.company {
+  font-size: 32px;
+  font-weight: bold;
+  color: #063B40;
+  margin: 0 0 5px 5px;
+}
+
+.profession {
   font-size: 26px;
   color: #555;
+  margin: 0 0 15px 5px;
 }
+
 .contact {
   font-size: 22px;
   color: #555;
+  margin: 0;
 }
-.contact-info { margin-top: 6px; }
-.contact-info > div { margin: 2px 0 2px 5px; }
 
-a { color: #2d5f4f; text-decoration: none; }
-a:hover { text-decoration: underline; }
+.contact div {
+  margin: 2px 0 2px 5px;
+}
 
-/* Respect hidden attribute */
-[hidden] { display: none !important; }
+.contact a {
+  color: #2d5f4f;
+  text-decoration: none;
+}
 
-/* Mobile (≤600px) */
-@media (max-width: 600px) {
-  body { padding: 10px; }
-  .card { padding: 18px; }
-  .layout { grid-template-columns: 1fr; row-gap: 20px; }
-  .logo { max-height: 450px; margin: 0 auto; }
-  .brand {
-    white-space: normal;
-    margin: -4px 0 8px 0;
-    text-align: center;
-    font-size: 28px;
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 600px) {
+  body {
+      padding: 10px;
   }
-  .tagline { font-size: 22px; margin: 0 0 18px 0; text-align: center; }
-  .contact { font-size: 20px; text-align: center; }
-  .contact-info > div { margin: 5px 0; }
+  
+  .signature {
+      max-width: 100%;
+  }
+  
+  .main-container {
+      padding: 18px;
+  }
+  
+  .content-table {
+      border-spacing: 0;
+  }
+  
+  .content-table tr {
+      display: block;
+      width: 100%;
+  }
+  
+  .logo-col {
+      display: block;
+      width: 100%;
+      min-width: auto;
+      text-align: center;
+      padding: 0 0 20px 0;
+  }
+  
+  .content-cell {
+      display: block;
+      width: 100%;
+      padding: 0;
+      text-align: center;
+  }
+  
+  .logo {
+      max-height: 450px;
+      margin: 0 auto;
+  }
+  
+  .company {
+      font-size: 28px;
+      text-align: center;
+      margin: 0 0 8px 0;
+  }
+  
+  .profession {
+      font-size: 22px;
+      text-align: center;
+      margin: 0 0 18px 0;
+  }
+  
+  .contact {
+      font-size: 20px;
+      text-align: center;
+  }
+  
+  .contact div {
+      margin: 5px 0;
+  }
 }
 
-/* Very small (≤400px) */
-@media (max-width: 400px) {
-  .brand { font-size: 24px; }
-  .tagline { font-size: 20px; }
-  .contact { font-size: 18px; }
-  .logo { max-height: 320px; }
+/* Very small screens */
+@media screen and (max-width: 400px) {
+  .company {
+      font-size: 24px;
+  }
+  
+  .profession {
+      font-size: 20px;
+  }
+  
+  .contact {
+      font-size: 18px;
+  }
+  
+  .logo {
+      max-height: 320px;
+  }
 }
