@@ -30,11 +30,11 @@ body {
 /* Columns */
 .logo-col { 
   text-align: center;
-  width: 400px; /* Fixed width */
-  min-width: 400px; /* Prevent shrinking */
+  width: 525px; /* Fixed width to accommodate your images */
+  min-width: 525px; /* Prevent shrinking */
 }
 .content-col {
-  margin-left: 30px;
+  margin-left: 50px;
 }
 /* Logo */
 .logo {
