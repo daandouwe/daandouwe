@@ -13,7 +13,7 @@ body {
 }
 
 /* Layout shell (replaces table layout; visual stays the same) */
-.wrapper { width: 100%; max-width: 800px; }
+.wrapper { width: 100%; max-width: 1200px; }
 .card {
   background: #F7ECD6;
   padding: 25px;
@@ -22,22 +22,20 @@ body {
 }
 .layout {
   display: grid;
-  grid-template-columns: 400px 1fr; /* Fixed width for logo column */
-  column-gap: 40px;
+  grid-template-columns: 525px 1fr; /* Match the actual logo-col width */
+  column-gap: 50px; /* This controls the spacing between columns */
   align-items: start;
 }
 
 /* Columns */
 .logo-col { 
   text-align: center;
-  width: 525px; /* Fixed width to accommodate your images */
-  min-width: 525px; /* Prevent shrinking */
+  /* Remove width/min-width - grid handles this */
 }
 .content-col {
-  margin-left: 50px;
-  width: 525px; /* Fixed width to accommodate your images */
-  min-width: 525px; /* Prevent shrinking */
+  /* Remove width/min-width and margins - grid handles this */
 }
+
 /* Logo */
 .logo {
   display: block;
@@ -84,11 +82,6 @@ a:hover { text-decoration: underline; }
   body { padding: 10px; }
   .card { padding: 18px; }
   .layout { grid-template-columns: 1fr; row-gap: 20px; }
-  .logo-col { 
-    text-align: center;
-    width: auto; /* Remove fixed width on mobile */
-    min-width: auto; /* Remove min-width on mobile */
-  }
   .logo { max-height: 450px; margin: 0 auto; }
   .brand {
     white-space: normal;
