@@ -1,254 +1,59 @@
 <!DOCTYPE html>
-<TITLE>Daan Douwe Bouwen</TITLE>
-<html>
+<html lang="nl">
 <head>
-    <!DOCTYPE html>
-    <html lang="nl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>Daan Douwe Bouwen - I build things</title>
-        
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-        <link rel="shortcut icon" href="favicon.ico">
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="main1.css" media="screen">
-        <link rel="stylesheet" href="mobile1.css" media="screen and (max-width: 800px)">
-        
-        <!-- SEO Meta Tags -->
-        <meta name="description" content="Daan Douwe van Stigt - I build things">
-        <meta name="author" content="Daan Douwe van Stigt">
-        <link rel="canonical" href="https://daandouwe.com">
-        <meta name="robots" content="index, follow">
-        <meta name="language" content="Dutch">
-        <meta name="geo.region" content="NL">
-        <meta name="geo.placename" content="Amsterdam">
-        
-        <!-- Open Graph / Social Media (WhatsApp, Facebook, etc.) -->
-        <meta property="og:title" content="Daan Douwe Bouwen">
-        <meta property="og:description" content="Daan Douwe van Stigt - I build things">
-        <meta property="og:url" content="https://daandouwe.com">
-        <meta property="og:type" content="website">
-        <meta property="og:image" content="android-chrome-512x512.png">
-        <!-- <meta property="og:image:width" content="1200"> -->
-        <!-- <meta property="og:image:height" content="630"> -->
-        <meta property="og:image:alt" content="Daan Douwe van Stigt">
-        
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Daam Douwe Bouwen">
-        <meta name="twitter:description" content="Daan Douwe van Stigt - I build things">
-        <meta name="twitter:image" content="android-chrome-512x512.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Daan Douwe Bouwen - I build things</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" media="screen">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Daan Douwe van Stigt - I build things">
+    <meta name="author" content="Daan Douwe van Stigt">
+    <link rel="canonical" href="https://daandouwe.com">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Dutch">
+    <meta name="geo.region" content="NL">
+    <meta name="geo.placename" content="Amsterdam">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Daan Douwe Bouwen">
+    <meta property="og:description" content="Daan Douwe van Stigt - I build things">
+    <meta property="og:url" content="https://daandouwe.com">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="android-chrome-512x512.png">
+    <meta property="og:image:alt" content="Daan Douwe van Stigt">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daan Douwe Bouwen">
+    <meta name="twitter:description" content="Daan Douwe van Stigt - I build things">
+    <meta name="twitter:image" content="android-chrome-512x512.png">
 
-        <!-- Preload important resources -->
-        <link rel="preload" href="main1.css" as="style">
-        <link rel="preload" href="/favicon-32x32.png" as="image">
+    <!-- Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-        <!-- DNS prefetch for external resources -->
-        <link rel="dns-prefetch" href="//www.google-analytics.com">
-
-        <!-- Your existing head content -->
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Daan Douwe Bouwen",
-              "description": "Timmerman & Aannemer",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Amsterdam",
-                "addressCountry": "NL"
-              },
-              "url": "https://daandouwe.com/bouwen"
-            }
-            </script>
-    </head>
-
-    <style>
-        body {
-            cursor: url('./cursor.png'), auto;
-        }
-
-        body {
-            background-color: #F7ECD6;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        
-        .signature {
-            font-family: times, sans-serif;
-            color: black;
-            line-height: 1.4;
-            max-width: 800px;
-            width: 100%;
-        }
-        
-        .signature table {
-            border-spacing: 0;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        
-        .signature td {
-            padding: 0;
-            vertical-align: top;
-        }
-        
-        .main-container {
-            background-color: #F7ECD6;
-            padding: 25px;
-            border-radius: 8px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .content-table {
-            border-spacing: 0;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        
-        .logo-cell {
-            padding-right: 40px;
-            width: auto;
-            text-align: center;
-        }
-        
-        .logo {
-            width: auto;
-            height: auto;
-            max-height: 700px;
-            max-width: 100%;
-            border-radius: 8px;
-            display: block;
-        }
-        
-        .content-cell {
-            padding-left: 30px;
-        }
-        
-        .company {
-            font-size: 32px;
-            font-weight: bold;
-            color: #063B40;
-            margin: 0 0 5px 5px;
-        }
-        
-        .profession {
-            font-size: 26px;
-            color: #555;
-            margin: 0 0 15px 5px;
-        }
-        
-        .contact {
-            font-size: 22px;
-            color: #555;
-            margin: 0;
-        }
-        
-        .contact div {
-            margin: 2px 0 2px 5px;
-        }
-        
-        .contact a {
-            color: #2d5f4f;
-            text-decoration: none;
-        }
-        
-        .contact a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Mobile styles */
-        @media screen and (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            
-            .signature {
-                max-width: 100%;
-            }
-            
-            .main-container {
-                padding: 18px;
-            }
-            
-            .content-table tr {
-                display: block;
-                width: 100%;
-            }
-            
-            .logo-cell {
-                display: block;
-                width: 100%;
-                text-align: center;
-                padding: 0 0 20px 0;
-            }
-            
-            .content-cell {
-                display: block;
-                width: 100%;
-                padding: 0;
-                text-align: center;
-            }
-            
-            .logo {
-                max-height: 450px;
-                margin: 0 auto;
-            }
-            
-            .company {
-                font-size: 28px;
-                text-align: center;
-                margin: 0 0 8px 0;
-            }
-            
-            .profession {
-                font-size: 22px;
-                text-align: center;
-                margin: 0 0 18px 0;
-            }
-            
-            .contact {
-                font-size: 20px;
-                text-align: center;
-            }
-            
-            .contact div {
-                margin: 5px 0;
-            }
-        }
-        
-        /* Very small screens */
-        @media screen and (max-width: 400px) {
-            .company {
-                font-size: 24px;
-            }
-            
-            .profession {
-                font-size: 20px;
-            }
-            
-            .contact {
-                font-size: 18px;
-            }
-            
-            .logo {
-                max-height: 320px;
-            }
-        }
-    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Daan Douwe Bouwen",
+      "description": "Timmerman & Aannemer",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Amsterdam",
+        "addressCountry": "NL"
+      },
+      "url": "https://daandouwe.com/bouwen"
+    }
+    </script>
 </head>
 <body>
     <div class="signature">
@@ -261,7 +66,7 @@
                                 <img id="rotatingImage" src="" alt="Daan Douwe Bouwen" class="logo">
                             </td>
                             <td class="content-cell">
-                                <div class="company">Daan Douwe<br>Bouwen</div>
+                                <div class="company">Daan<br>Douwe<br>Bouwen</div>
                                 <div class="profession">Timmerman & Aannemer</div>
                                 <div class="contact">
                                     <!-- Turnstile widget -->
@@ -276,64 +81,54 @@
                                         <div>KvK: 97741256</div>
                                     </div>
                                 </div>
-                                <script>
-                                    function onSuccess(token) {
-                                        // Show contact info when Turnstile is completed
-                                        document.getElementById('contact-info').style.display = 'block';
-                                        
-                                        // Optional: Hide the Turnstile widget after success
-                                        document.querySelector('.cf-turnstile').style.display = 'none';
-                                        
-                                        // Optional: Verify the token with your server
-                                        // verifyTurnstileToken(token);
-                                    }
-                                </script>
                             </td>
                         </tr>
                     </table>
-
                 </td>
             </tr>
         </table>
     </div>
+    
     <script>
-        // List your image filenames here
+        function onSuccess(token) {
+            document.getElementById('contact-info').style.display = 'block';
+            document.querySelector('.cf-turnstile').style.display = 'none';
+        }
+    </script>
+    
+    <script>
         const images = [
-        'logo-large.svg',
-        'images/1.jpeg',
-        'images/2.jpeg',
-        'images/3.jpeg',
-        'images/4.jpeg',
-        'images/5.jpeg',
-        'images/6.jpeg',
-        'images/7.jpeg',
-        'images/8.jpeg',
-        'images/9.jpeg',
-        'images/10.jpeg',
-        'images/12.jpeg',
-        'images/13.jpeg',
-        'images/14.jpeg',
-        'images/15.jpeg',
-        'images/16.jpeg',
-        'images/17.jpeg',
-        'images/18.jpeg',
-        'images/19.jpeg',
-        'images/20.jpeg',
+            'logo-large.svg',
+            'images/1.jpeg',
+            'images/2.jpeg',
+            'images/3.jpeg',
+            'images/4.jpeg',
+            'images/5.jpeg',
+            'images/6.jpeg',
+            'images/7.jpeg',
+            'images/8.jpeg',
+            'images/9.jpeg',
+            'images/10.jpeg',
+            'images/12.jpeg',
+            'images/13.jpeg',
+            'images/14.jpeg',
+            'images/15.jpeg',
+            'images/16.jpeg',
+            'images/17.jpeg',
+            'images/18.jpeg',
+            'images/19.jpeg',
+            'images/20.jpeg',
         ];
 
         let currentIndex = 0;
         const imgElement = document.getElementById('rotatingImage');
 
-        // Function to change image
         function rotateImage() {
-          imgElement.src = images[currentIndex];
-          currentIndex = (currentIndex + 1) % images.length;
+            imgElement.src = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
         }
 
-        // Show first image immediately
         rotateImage();
-
-        // Rotate every 6 seconds
         setInterval(rotateImage, 3000);
     </script>
 </body>
