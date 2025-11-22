@@ -30,7 +30,7 @@ body {
 
 .signature td {
   padding: 0;
-  vertical-align: middle; /* Changed to middle for better alignment */
+  vertical-align: middle;
 }
 
 .main-container {
@@ -42,13 +42,13 @@ body {
 
 /* Desktop layout - side by side */
 .content-table {
-  border-spacing: 60px 0; /* 60px space between columns */
+  border-spacing: 60px 0;
   border-collapse: separate;
   width: 100%;
 }
 
 .logo-col {
-  width: 450px; /* Increased width for portrait images */
+  width: 450px;
   text-align: center;
   padding: 0;
 }
@@ -56,7 +56,7 @@ body {
 .logo {
   width: 100%;
   height: auto;
-  max-height: 650px; /* Limit height */
+  max-height: 650px;
   border-radius: 8px;
   display: block;
   object-fit: contain;
@@ -69,27 +69,28 @@ body {
 }
 
 .company {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: bold;
   color: #063B40;
-  margin: 0 0 15px 0;
-  line-height: 1.2;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
 }
 
 .profession {
-  font-size: 28px;
+  font-size: 22px;
   color: #555;
-  margin: 0 0 25px 0;
+  margin: 0 0 20px 0;
 }
 
 .contact {
-  font-size: 22px;
+  font-size: 18px;
   color: #555;
   margin: 0;
+  line-height: 1.6;
 }
 
 .contact div {
-  margin: 8px 0;
+  margin: 4px 0;
 }
 
 .contact a {
@@ -113,14 +114,6 @@ body {
   
   .logo {
     max-height: 500px;
-  }
-  
-  .company {
-    font-size: 36px;
-  }
-  
-  .profession {
-    font-size: 24px;
   }
 }
 
@@ -148,7 +141,7 @@ body {
     width: 100%;
     text-align: center;
     padding: 0;
-    margin-bottom: 30px; /* Space between image and text */
+    margin-bottom: 30px;
   }
   
   .content-cell {
@@ -167,22 +160,22 @@ body {
   .company {
     font-size: 32px;
     text-align: center;
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
   }
   
   .profession {
-    font-size: 24px;
+    font-size: 22px;
     text-align: center;
     margin: 0 0 20px 0;
   }
   
   .contact {
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
   }
   
   .contact div {
-    margin: 8px 0;
+    margin: 4px 0;
   }
 }
 
@@ -193,11 +186,11 @@ body {
   }
   
   .profession {
-    font-size: 22px;
+    font-size: 20px;
   }
   
   .contact {
-    font-size: 18px;
+    font-size: 16px;
   }
   
   .logo {
