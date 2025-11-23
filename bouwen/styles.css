@@ -273,7 +273,7 @@ body {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  font-size: 36px;
+  font-size: 24px;
   font-family: 'Times New Roman', times, serif;
 }
 
@@ -288,4 +288,31 @@ body {
 /* Add padding to body to account for fixed navbar */
 body {
   padding-top: 70px;
+}
+
+
+/* Contact Page */
+.contact-page {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.contact-heading {
+  font-size: 42px;
+  font-weight: bold;
+  color: #063B40;
+  margin: 0 0 40px 0;
+  font-family: times, serif;
+}
+
+.contact-page .contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-page .contact div {
+  margin: 8px 0;
 }
