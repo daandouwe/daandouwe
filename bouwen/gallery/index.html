@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Gallery - Daan Douwe Bouwen</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="shortcut icon" href="../favicon.ico">
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="../styles.css" media="screen">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Gallery Daan Douwe van Stigt">
     <meta name="author" content="Daan Douwe van Stigt">
@@ -22,7 +21,7 @@
     <meta name="language" content="Dutch">
     <meta name="geo.region" content="NL">
     <meta name="geo.placename" content="Amsterdam">
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Gallery - Daan Douwe Bouwen">
     <meta property="og:description" content="Gallery Daan Douwe van Stigt">
@@ -30,7 +29,7 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="../android-chrome-512x512.png">
     <meta property="og:image:alt" content="Daan Douwe van Stigt">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gallery - Daan Douwe Bouwen">
@@ -55,6 +54,7 @@
     }
     </script>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
@@ -72,10 +72,7 @@
 
     <!-- Gallery Section -->
     <div id="gallery" class="gallery-section">
-        <!-- <h2 class="gallery-heading">Gallery</h2> -->
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Images will be inserted here by JavaScript -->
-        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
     <!-- Lightbox Modal -->
@@ -112,21 +109,6 @@
             '../images/19.jpeg',
             '../images/20.jpeg',
         ];
-    
-        // Image rotation for hero section
-        let currentIndex = 0;
-        const imgElement = document.getElementById('rotatingImage');
-    
-        function rotateImage() {
-            imgElement.src = images[currentIndex];
-            currentIndex = (currentIndex + 1) % images.length;
-        }
-    
-        rotateImage();
-        setTimeout(function() {
-            rotateImage();
-            setInterval(rotateImage, 1500);
-        }, 4000);
     
         // Gallery generation
         const galleryGrid = document.getElementById('galleryGrid');
@@ -190,12 +172,11 @@
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('active')) return;
-            
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') showPrevImage();
             if (e.key === 'ArrowRight') showNextImage();
         });
-    </script>
+    </script>  <!-- ✅ THIS WAS MISSING -->
 
     <!-- Navbar -->
     <script>
