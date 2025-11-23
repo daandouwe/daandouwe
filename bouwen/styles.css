@@ -20,12 +20,14 @@ body {
   line-height: 1.4;
   max-width: 1200px;
   width: 100%;
+  display: flex;
+  justify-content: center;  /* Center the table */
 }
 
 .signature table {
   border-spacing: 0;
   border-collapse: collapse;
-  width: 100%;
+  width: auto;  /* Changed from 100% to auto so it centers */
 }
 
 .signature td {
@@ -37,14 +39,14 @@ body {
   background-color: #F7ECD6;
   padding: 25px;
   border-radius: 8px;
-  width: 100%;
+  width: auto;  /* Changed from 100% */
 }
 
 /* Desktop layout - side by side */
 .content-table {
-  border-spacing: 20px 0;
+  border-spacing: 60px 0;  /* Changed back to 60px for more margin */
   border-collapse: separate;
-  width: 100%;
+  width: auto;  /* Changed from 100% */
 }
 
 .logo-col {
@@ -127,12 +129,18 @@ body {
     padding: 15px;
   }
   
+  .signature table {
+    width: 100%;  /* Full width on mobile */
+  }
+  
   .main-container {
     padding: 20px;
+    width: 100%;  /* Full width on mobile */
   }
   
   .content-table {
     border-spacing: 0;
+    width: 100%;  /* Full width on mobile */
   }
   
   .content-table tr {
