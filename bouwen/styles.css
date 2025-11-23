@@ -20,19 +20,20 @@ body {
   line-height: 1.4;
   max-width: 1200px;
   width: 100%;
-  border-spacing: 20px;
+  /* Remove: border-spacing: 20px; */
   display: flex;
-  justify-content: center;  /* Center the table */
+  justify-content: center;
 }
 
 .signature table {
-  border-spacing: 20px;
+  /* Remove: border-spacing: 20px; */
   border-collapse: collapse;
-  width: auto;  /* Changed from 100% to auto so it centers */
+  width: auto;
 }
 
 .signature td {
-  padding: 20;
+  /* Change: padding: 20; to padding: 0; */
+  padding: 0;
   vertical-align: middle;
 }
 
