@@ -308,8 +308,7 @@ body {
   border-radius: 10px;
   margin-top: 10px;
   align-items: right;
-  text-align: right;
-  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
+  text-align: right;  
 }
 
 .dropdown-content a {
@@ -470,5 +469,6 @@ body {
 
   .dropdown-content a {
     font-size: 16px;
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
   }
 }
