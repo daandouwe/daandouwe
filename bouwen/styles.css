@@ -429,17 +429,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
 }
 
 .lightbox-nav button:hover {
-  scale: 1.2;
-  transform: translateY(-50%); /* Keeps it vertically centered */
+  transform: translateY(-50%) scale(1.2);
 }
 
 .lightbox-nav button img {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
 }
 
 
