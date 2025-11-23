@@ -20,6 +20,7 @@ body {
   line-height: 1.4;
   max-width: 1200px;
   width: 100%;
+  border-spacing: 20px;
   display: flex;
   justify-content: center;  /* Center the table */
 }
@@ -31,7 +32,7 @@ body {
 }
 
 .signature td {
-  padding: 0;
+  padding: 20;
   vertical-align: middle;
 }
 
@@ -44,7 +45,7 @@ body {
 
 /* Desktop layout - side by side */
 .content-table {
-  border-spacing: 60px 0;  /* Changed back to 60px for more margin */
+  border-spacing: 20px 0;
   border-collapse: separate;
   width: auto;  /* Changed from 100% */
 }
