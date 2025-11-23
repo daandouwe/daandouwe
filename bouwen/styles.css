@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   cursor: url('./cursor.png'), auto;
   background-color: #F7ECD6;
@@ -290,6 +294,7 @@ body {
   /* border: 2px solid #063B40; */
   border-radius: 4px;
   margin-top: 10px;
+  align-items: right;
 }
 
 .dropdown-content a {
