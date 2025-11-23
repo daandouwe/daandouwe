@@ -87,7 +87,7 @@
         <br>
         <br>
         <br>
-        <div class="contact" id="contact">
+        <div class="contact">
             <img src="face-round.svg" alt="Daan Douwe Contact" class="contact-icon">
             <br>
             <!-- Turnstile widget -->
@@ -96,21 +96,22 @@
                 data-theme="light"
                 data-callback="onSuccess">
             </div>
-            <div class="contact" id="contact-turnstile" style="display: none;">
+            <div class="contact" id="contact" style="display: none;">
                 <div>Amsterdam, Nederland</div>
                 <div>E: <a href="mailto:bouwen@daandouwe.com">bouwen@daandouwe.com</a></div>
                 <div>KvK: 97741256</div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
     <script>
         const images = [
@@ -178,7 +179,7 @@
 
     <script>
         function onSuccess(token) {
-            document.getElementById('contact-turnstile').style.display = 'block';
+            document.getElementById('contact').style.display = 'block';
             document.querySelector('.cf-turnstile').style.display = 'none';
         }
     </script>
