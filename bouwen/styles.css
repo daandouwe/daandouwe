@@ -110,11 +110,11 @@ body {
 }
 
 .contact {
-  font-size: 18px;
+  font-size: 24px;
   color: #555;
   margin: 0;
   line-height: 1.8;
-  text-align: left;
+  text-align: center;
 }
 
 .contact div {
@@ -131,10 +131,11 @@ body {
 }
 
 .contact-icon {
-  width: 50px;
+  width: 100px;
   height: auto;
   border-radius: 50%;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 /* Tablet */
@@ -272,7 +273,7 @@ body {
   padding: 5px;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: right;
   justify-content: center;
 }
 
@@ -320,31 +321,4 @@ body {
 
 .dropdown-content.show {
   display: block;
-}
-
-
-/* Contact Page */
-.contact-page {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.contact-heading {
-  font-size: 42px;
-  font-weight: bold;
-  color: #063B40;
-  margin: 0 0 40px 0;
-  font-family: times, serif;
-}
-
-.contact-page .contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contact-page .contact div {
-  margin: 8px 0;
 }
