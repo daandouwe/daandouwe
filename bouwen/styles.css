@@ -478,6 +478,12 @@ body {
       width: 20px;
       height: 20px;
   }
+
+  .lightbox-nav button img {
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
+  }
   
   .dropdown-arrow {
     width: 70px;
