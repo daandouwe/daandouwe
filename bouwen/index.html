@@ -114,17 +114,23 @@
             'images/19.jpeg',
             'images/20.jpeg',
         ];
-
+    
         let currentIndex = 0;
         const imgElement = document.getElementById('rotatingImage');
-
+    
         function rotateImage() {
             imgElement.src = images[currentIndex];
             currentIndex = (currentIndex + 1) % images.length;
         }
-
+    
+        // Show first image immediately
         rotateImage();
-        setInterval(rotateImage, 1300);
+        
+        // Wait 3 seconds, then start rotating every 1.3 seconds
+        setTimeout(function() {
+            rotateImage();
+            setInterval(rotateImage, 1300);
+        }, 3000);
     </script>
 </body>
 </html>
