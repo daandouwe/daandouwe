@@ -42,7 +42,7 @@ body {
 
 /* Desktop layout - side by side */
 .content-table {
-  border-spacing: 60px 0;
+  border-spacing: 20px 0;
   border-collapse: separate;
   width: 100%;
 }
@@ -74,7 +74,7 @@ body {
   font-weight: bold !important;
   color: #063B40 !important;
   margin: 0 0 10px 0;
-  line-height: 3.6;
+  line-height: 1.2;
   text-align: left;
 }
 
