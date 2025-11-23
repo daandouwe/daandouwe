@@ -419,17 +419,30 @@ body {
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(255, 255, 255, 0.2);
-  color: white;
   border: none;
-  font-size: 40px;
   padding: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 4px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lightbox-nav button:hover {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-nav button img {
+  width: 30px;
+  height: 30px;
+  /* filter: invert(1); Makes the arrow white */
+}
+
+.lightbox-prev img {
+  transform: rotate(180deg); /* Flips the arrow to point left */
 }
 
 .lightbox-prev {
