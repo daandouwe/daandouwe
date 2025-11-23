@@ -119,7 +119,6 @@
             'logo-large.svg',
             'images/1.jpeg',
             'images/2.jpeg',
-            'images/21.jpeg',
             'images/3.jpeg',
             'images/4.jpeg',
             'images/5.jpeg',
@@ -156,22 +155,20 @@
             'images/36.jpeg',
         ];
     
-        let currentIndex = 0;
-        const imgElement = document.getElementById('rotatingImage');
-    
-        function rotateImage() {
-            imgElement.src = images[currentIndex];
-            currentIndex = (currentIndex + 1) % images.length;
-        }
-    
-        // Show first image immediately
-        rotateImage();
+    let currentIndex = 0;
+    const imgElement = document.getElementById('rotatingImage');
+
+    function rotateImage() {
+        imgElement.src = images[currentIndex];
+        currentIndex = (currentIndex + 1) % images.length;
         
-        // Wait 4 seconds, then start rotating every 1.5 seconds
-        setTimeout(function() {
-            rotateImage();
-            setInterval(rotateImage, 1000);
-        }, 6000);
+        // If we just showed the first image, wait 6 seconds. Otherwise wait 1 second.
+        const delay = currentIndex === 1 ? 6000 : 1000;
+        setTimeout(rotateImage, delay);
+    }
+
+    // Show first image immediately, then start the loop
+    rotateImage();
     </script>
 
     <script>
