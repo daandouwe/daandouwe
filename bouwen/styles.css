@@ -70,9 +70,9 @@ body {
 }
 
 .company {
-  font-size: 32px;
-  font-weight: bold;
-  color: #063B40;
+  font-size: 32px !important;
+  font-weight: bold !important;
+  color: #063B40 !important;
   margin: 0 0 10px 0;
   line-height: 1.2;
   text-align: center;   /* was left */
