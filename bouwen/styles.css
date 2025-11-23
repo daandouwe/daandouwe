@@ -465,3 +465,10 @@ body {
     height: 70px;
   }
 }
+
+.cf-turnstile {
+  border: 2px solid #063B40;
+  border-radius: 8px;
+  padding: 10px;
+  background-color:  #F7ECD6;
+}
