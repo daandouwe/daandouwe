@@ -131,10 +131,10 @@ body {
 }
 
 .contact-icon {
-  width: 120px;
+  width: 140px;
   height: auto;
   border-radius: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   align-items: center;
 }
 
@@ -274,6 +274,7 @@ body {
   cursor: pointer;
   display: flex;
   align-items: right;
+  text-align: right;
   justify-content: center;
 }
 
@@ -303,6 +304,7 @@ body {
   border-radius: 4px;
   margin-top: 10px;
   align-items: right;
+  text-align: right;
 }
 
 .dropdown-content a {
