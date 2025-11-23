@@ -475,13 +475,13 @@ body {
   .lightbox-nav button {
       font-size: 30px;
       padding: 10px;
-      width: 20px;
-      height: 20px;
+      width: 50px;
+      height: 50px;
   }
 
   .lightbox-nav button img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
   }
   
