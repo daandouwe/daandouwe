@@ -324,3 +324,136 @@ body {
 .dropdown-content.show {
   display: block;
 }
+
+
+
+/* Gallery Section */
+.gallery-section {
+  padding: 80px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-heading {
+  font-size: 42px;
+  font-weight: bold;
+  color: #063B40;
+  text-align: center;
+  margin: 0 0 40px 0;
+  font-family: times, serif;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  aspect-ratio: 3/4;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+  color: #bbb;
+}
+
+.lightbox-nav button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  font-size: 40px;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.lightbox-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+/* Mobile Gallery */
+@media screen and (max-width: 600px) {
+  .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      padding: 10px;
+  }
+  
+  .gallery-heading {
+      font-size: 32px;
+  }
+  
+  .lightbox-close {
+      font-size: 40px;
+      right: 20px;
+  }
+  
+  .lightbox-nav button {
+      font-size: 30px;
+      padding: 10px;
+  }
+}
