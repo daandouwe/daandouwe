@@ -91,9 +91,11 @@
             <!-- Turnstile widget -->
             <div class="cf-turnstile"
                 data-sitekey="0x4AAAAAABvJRWjYdyGLUMm_"
-                data-callback="onSuccess">
+                data-callback="onSuccess"
+                id="contact"
+                >
             </div>
-            <div class="contact" id="contact" style="display: none;">
+            <div class="contact" id="contact-turnstile" style="display: none;">
                 <div>Amsterdam, Nederland</div>
                 <div>E: <a href="mailto:bouwen@daandouwe.com">bouwen@daandouwe.com</a></div>
                 <div>KvK: 97741256</div>
@@ -177,7 +179,7 @@
 
     <script>
         function onSuccess(token) {
-            document.getElementById('contact').style.display = 'block';
+            document.getElementById('contact-turnstile').style.display = 'block';
             document.querySelector('.cf-turnstile').style.display = 'none';
         }
     </script>
