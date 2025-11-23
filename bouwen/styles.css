@@ -136,6 +136,7 @@ body {
   border-radius: 50%;
   margin-bottom: 10px;
   align-items: center;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);  /* Shadow to the right and down */
 }
 
 /* Tablet */
@@ -276,6 +277,7 @@ body {
   align-items: right;
   text-align: right;
   justify-content: center;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);  /* Shadow to the right and down */
 }
 
 /* .dropdown-button:hover {
