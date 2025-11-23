@@ -8,6 +8,7 @@ body {
   background-color: #F7ECD6;
   margin: 0;
   padding: 20px;
+  padding-top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,10 +19,16 @@ body {
 .signature {
   color: black;
   line-height: 1.4;
-  max-width: 1200px;
   width: 100%;
+  max-width: 1200px;
+
+  /* stacked, centered always */
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+
+  gap: 28px;
 }
 
 .signature table {
@@ -48,43 +55,45 @@ body {
   width: auto;  /* Changed from 100% */
 }
 
+/* Fixed “image slot” so text doesn't move */
 .logo-col {
-  width: 450px;
+  width: min(450px, 100%);
+  height: 650px;              /* locks the vertical space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 0;
 }
 
 .logo {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;          /* fills the slot without changing its size */
   height: auto;
-  max-height: 650px;
+  width: auto;
   border-radius: 8px;
   display: block;
   object-fit: contain;
-  margin: 0 auto;
-  margin-right: 20px;
 }
 
+
 .content-cell {
-  padding: 0;
-  vertical-align: middle;
-  text-align: left;
+  text-align: center;
 }
 
 .company {
-  font-size: 32px !important;
-  font-weight: bold !important;
-  color: #063B40 !important;
+  font-size: 32px;
+  font-weight: 700;
+  color: #063B40;
   margin: 0 0 10px 0;
   line-height: 1.2;
-  text-align: left;
+  text-align: center;
 }
 
 .profession {
   font-size: 22px;
   color: #555;
-  margin: 0 0 20px 0;
-  text-align: left;
+  margin: 0;
+  text-align: center;
 }
 
 .contact {
@@ -115,7 +124,8 @@ body {
   }
   
   .logo-col {
-    width: 350px;
+    width: min(350px, 100%);
+    height: 500px;
   }
   
   .logo {
@@ -151,10 +161,11 @@ body {
   .logo-col {
     display: block;
     width: 100%;
+    height: 500px;
     text-align: center;
     padding: 0;
     margin-bottom: 30px;
-  }
+    }
   
   .content-cell {
     display: block;
@@ -207,6 +218,10 @@ body {
   
   .logo {
     max-height: 400px;
+  }
+
+  .logo-col {
+    height: 400px;
   }
 }
 
@@ -284,11 +299,6 @@ body {
 
 .dropdown-content.show {
   display: block;
-}
-
-/* Add padding to body to account for fixed navbar */
-body {
-  padding-top: 70px;
 }
 
 

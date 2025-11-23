@@ -71,19 +71,16 @@
     </nav>
 
     <div class="signature">
-        <table class="content-table">
-            <tr>
-                <td class="logo-col">
-                    <img id="rotatingImage" src="" alt="Daan Douwe Bouwen" class="logo">
-                </td>
-                <td class="content-cell">
-                    <div class="company">Daan Douwe Bouwen</div>
-                    <div class="profession">Timmerman & Aannemer</div>
-                </td>
-            </tr>
-        </table>
+        <div class="logo-col">
+          <img id="rotatingImage" src="" alt="Daan Douwe Bouwen" class="logo">
+        </div>
+
+        <div class="content-cell">
+          <div class="company">Daan Douwe<br>Bouwen</div>
+          <div class="profession">Timmerman & Aannemer</div>
+        </div>
     </div>
-    
+
     <script>
         function onSuccess(token) {
             document.getElementById('contact-info').style.display = 'block';
