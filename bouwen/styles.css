@@ -25,7 +25,7 @@ body {
 }
 
 .signature table {
-  border-spacing: 0;
+  border-spacing: 20px;
   border-collapse: collapse;
   width: auto;  /* Changed from 100% to auto so it centers */
 }
