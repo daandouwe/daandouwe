@@ -467,8 +467,11 @@ body {
     height: 70px;
   }
 
+  .dropdown-content {
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
+  }
+
   .dropdown-content a {
     font-size: 16px;
-    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
   }
 }
