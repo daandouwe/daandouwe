@@ -296,8 +296,10 @@ body {
   display: none;
   position: absolute;
   right: 0;
-  background-color: #F7ECD6;
+  /* background-color: #F7ECD6; */
+  background-color: rgba(247, 236, 214, 0.95);
   min-width: 200px;
+  backdrop-filter: blur(4px);               /* optional, looks elegant */
   /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
   z-index: 1;
   /* border: 2px solid #063B40; */
@@ -309,6 +311,7 @@ body {
 
 .dropdown-content a {
   color: #063B40;
+  border: 1px solid rgba(6, 59, 64, 0.2);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -455,5 +458,10 @@ body {
   .lightbox-nav button {
       font-size: 30px;
       padding: 10px;
+  }
+
+  .dropdown-arrow {
+    width: 70px;
+    height: 70px;
   }
 }
