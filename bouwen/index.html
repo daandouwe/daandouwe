@@ -65,7 +65,7 @@
             <div class="dropdown-content" id="dropdownContent">
                 <a href="./">Home</a>
                 <a href="gallery/">Gallery</a>
-                <a href="contact/">Contact</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
@@ -76,17 +76,26 @@
         </div>
 
         <div class="content-cell">
-          <div class="company">Daan Douwe<br>Bouwen</div>
+          <div class="company">Daan Douwe Bouwen</div>
           <div class="profession">Timmerman & Aannemer</div>
         </div>
     </div>
+    <br><br>
+    <div class="contact-title" id="contact">Contact</div>
+    <div class="contact">
+        <!-- Turnstile widget -->
+        <div class="cf-turnstile" 
+            data-sitekey="0x4AAAAAABvJRWjYdyGLUMm_"
+            data-theme="light"
+            data-callback="onSuccess">
+        </div>
+        <div class="contact" style="display: none;">
+            <div>Amsterdam, Nederland</div>
+            <div>E: <a href="mailto:bouwen@daandouwe.com">bouwen@daandouwe.com</a></div>
+            <div>KvK: 97741256</div>
+        </div>
+    </div>
 
-    <script>
-        function onSuccess(token) {
-            document.getElementById('contact-info').style.display = 'block';
-            document.querySelector('.cf-turnstile').style.display = 'none';
-        }
-    </script>
     
     <script>
         const images = [
@@ -151,5 +160,13 @@
             }
         });
     </script>
+
+    <script>
+        function onSuccess(token) {
+            document.getElementById('contact-info').style.display = 'block';
+            document.querySelector('.cf-turnstile').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>

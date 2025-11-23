@@ -75,5 +75,32 @@
             <h1 class="gallery-heading">Gallery</h1>
         </div>
     </div>
+    
+    <script>
+        function onSuccess(token) {
+            document.getElementById('contact-info').style.display = 'block';
+            document.querySelector('.cf-turnstile').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const dropdownArrow = document.getElementById('dropdownArrow');
+
+        dropdownButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('show');
+            dropdownArrow.classList.toggle('flipped');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+                dropdownArrow.classList.remove('flipped');
+            }
+        });
+    </script>
 </body>
 </html>
