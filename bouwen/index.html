@@ -56,6 +56,30 @@
     </script>
 </head>
 <body>
+    <!-- <div class="dropdown">
+        <button class="dropdown-button" id="dropdownButton">
+            <span>Menu</span>
+            <svg class="dropdown-arrow" id="dropdownArrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="#063B40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="dropdown-content" id="dropdownContent">
+            <a href="#link1">Link 1</a>
+            <a href="#link2">Link 2</a>
+            <a href="#link3">Link 3</a>
+        </div>
+    </div> -->
+    <div class="dropdown">
+        <button class="dropdown-button" id="dropdownButton">
+            <span>Menu</span>
+            <img src="favicon-512x512.png" alt="arrow" class="dropdown-arrow" id="dropdownArrow">
+        </button>
+        <div class="dropdown-content" id="dropdownContent">
+            <a href="#link1">Link 1</a>
+            <a href="#link2">Link 2</a>
+            <a href="#link3">Link 3</a>
+        </div>
+    </div>
     <div class="signature">
         <table class="content-table">
             <tr>
@@ -132,6 +156,26 @@
             rotateImage();
             setInterval(rotateImage, 1100);
         }, 4000);
+    </script>
+
+    <script>
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const dropdownArrow = document.getElementById('dropdownArrow');
+
+        dropdownButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('show');
+            dropdownArrow.classList.toggle('flipped');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+                dropdownArrow.classList.remove('flipped');
+            }
+        });
     </script>
 </body>
 </html>
