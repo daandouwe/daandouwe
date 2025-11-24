@@ -334,8 +334,8 @@ body {
   
   /* Top left logo on very small screens */
   .top-logo {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -664,8 +664,8 @@ body {
   
   /* Top left logo on mobile */
   .top-logo {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     top: 12px;
     left: 15px;
   }
