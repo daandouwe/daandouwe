@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Image carousel setup
     const images = [
-        'logo-large-3.svg',
+        'logo-large.svg',
         'images/1.jpeg',
         'images/2.jpeg',
         'images/3.jpeg',
