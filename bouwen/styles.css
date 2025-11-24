@@ -83,6 +83,22 @@ body {
   display: block;
   object-fit: cover;          /* changed from contain to cover for uniform sizing */
   object-position: center;    /* centers the image */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for hover */
+}
+
+/* Hover effect for carousel - indicates clickable */
+.image-carousel:hover {
+  transform: scale(1.02);     /* Slight zoom on hover */
+  opacity: 0.95;              /* Slight transparency */
+  cursor: pointer;            /* Show pointer cursor */
+}
+
+/* Disable hover effects on touch devices to prevent sticky hover */
+@media (hover: none) and (pointer: coarse) {
+  .image-carousel:hover {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 
@@ -487,8 +503,8 @@ body {
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 4px;
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -538,13 +554,13 @@ body {
   .lightbox-nav button {
       font-size: 30px;
       padding: 10px;
-      width: 90px;
-      height: 90px;
+      width: 50px;
+      height: 50px;
   }
 
   .lightbox-nav button img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
   }
   
