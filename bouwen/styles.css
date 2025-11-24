@@ -35,12 +35,12 @@ body {
   gap: 28px;
 }
 
-.signature table {
+/* .signature table {
   border-collapse: collapse;
   width: auto;
-}
+} */
 
-.signature td {
+.home td {
   padding: 0;
   vertical-align: middle;
 }
@@ -161,9 +161,9 @@ body {
     padding: 15px;
   }
   
-  .signature table {
-    width: 100%;  /* Full width on mobile */
-  }
+  /* .signature table {
+    width: 100%;
+  } */
   
   .main-container {
     padding: 20px;
