@@ -65,7 +65,7 @@
             <div class="dropdown-content" id="dropdownContent">
                 <a href="./" class="active">Home</a>
                 <a href="gallery/">Gallery</a>
-                <a href="./#contact">Contact</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
@@ -114,91 +114,8 @@
         <br>
     </div>
 
-    <script>
-        const images = [
-            'logo-large.svg',
-            'images/1.jpeg',
-            'images/2.jpeg',
-            'images/3.jpeg',
-            'images/4.jpeg',
-            'images/5.jpeg',
-            'images/6.jpeg',
-            'images/7.jpeg',
-            'images/8.jpeg',
-            'images/9.jpeg',
-            'images/10.jpeg',
-            'images/11.jpeg',
-            'images/12.jpeg',
-            'images/13.jpeg',
-            'images/14.jpeg',
-            'images/15.jpeg',
-            'images/16.jpeg',
-            'images/17.jpeg',
-            'images/18.jpeg',
-            'images/19.jpeg',
-            'images/20.jpeg',
-            'images/21.jpeg',
-            'images/22.jpeg',
-            'images/23.jpeg',
-            'images/24.jpeg',
-            'images/25.jpeg',
-            'images/26.jpeg',
-            'images/27.jpeg',
-            'images/28.jpeg',
-            'images/29.jpeg',
-            'images/30.jpeg',
-            'images/31.jpeg',
-            'images/32.jpeg',
-            'images/33.jpeg',
-            'images/34.jpeg',
-            'images/35.jpeg',
-            'images/36.jpeg',
-        ];
-    
-    let currentIndex = 0;
-    const imgElement = document.getElementById('rotatingImage');
-
-    function rotateImage() {
-        imgElement.src = images[currentIndex];
-        currentIndex = (currentIndex + 1) % images.length;
-        
-        // If we just showed the first image, wait 6 seconds. Otherwise wait 1 second.
-        const delay = currentIndex === 1 ? 6000 : 1000;
-        setTimeout(rotateImage, delay);
-    }
-
-    // Show first image immediately, then start the loop
-    rotateImage();
-    </script>
-
-    <script>
-        const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownContent = document.getElementById('dropdownContent');
-        const dropdownArrow = document.getElementById('dropdownArrow');
-
-        dropdownButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdownContent.classList.toggle('show');
-            dropdownArrow.classList.toggle('flipped');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            if (dropdownContent.classList.contains('show')) {
-                dropdownContent.classList.remove('show');
-                dropdownArrow.classList.remove('flipped');
-            }
-        });
-    </script>
-
-    <script>
-        function onSuccess(token) {
-            document.getElementById('contact-turnstile').style.display = 'block';
-            document.querySelector('.cf-turnstile').style.display = 'none';
-        }
-    </script>
-
-    <script src="smooth-scroll-fix.js"></script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 
 </body>
 </html>
