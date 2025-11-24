@@ -86,6 +86,13 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for hover */
 }
 
+/* Special handling for SVG in carousel - don't crop */
+.image-carousel[src$=".svg"] {
+  object-fit: contain;        /* Contain for SVGs to prevent cutoff */
+  min-width: auto;            /* Allow SVG to size naturally */
+  max-width: 100%;
+}
+
 /* Hover effect for carousel - indicates clickable */
 .image-carousel:hover {
   transform: scale(1.02);     /* Slight zoom on hover */
@@ -189,6 +196,13 @@ body {
     object-fit: cover;
     object-position: center;
   }
+  
+  /* Special handling for SVG in carousel on tablet */
+  .image-carousel[src$=".svg"] {
+    object-fit: contain;
+    min-width: auto;
+    max-width: 100%;
+  }
 }
 
 /* Mobile - stacked layout */
@@ -249,6 +263,13 @@ body {
     object-position: center;
   }
   
+  /* Special handling for SVG in carousel - don't crop */
+  .image-carousel[src$=".svg"] {
+    object-fit: contain;  /* Contain instead of cover for SVGs */
+    max-width: 90%;
+    min-width: auto;      /* Remove min-width constraint for SVGs */
+  }
+  
   .company {
     font-size: 32px;
     text-align: center;
@@ -292,6 +313,13 @@ body {
     height: auto;
     object-fit: cover;
     object-position: center;
+  }
+  
+  /* Special handling for SVG in carousel on very small screens */
+  .image-carousel[src$=".svg"] {
+    object-fit: contain;
+    max-width: 90%;
+    min-width: auto;
   }
 
   .logo {
