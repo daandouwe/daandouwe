@@ -694,3 +694,49 @@ body {
   transform: rotate(45deg);
   margin-right: 4px;
 }
+
+/* Social Footer */
+.social-footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  font-family: times, serif;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.social-footer:hover {
+  opacity: 1;
+}
+
+.social-footer a {
+  color: #063B40;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.social-footer a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.social-footer .footer-separator {
+  color: #063B40;
+  opacity: 0.5;
+  user-select: none;
+}
+
+/* Mobile adjustments for footer */
+@media screen and (max-width: 600px) {
+  .social-footer {
+    bottom: 15px;
+    font-size: 12px;
+    gap: 10px;
+  }
+}
