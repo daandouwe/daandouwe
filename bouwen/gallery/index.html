@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../styles.css" media="screen">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Gallery Daan Douwe van Stigt">
+    <meta name="description" content="Gallery - Daan Douwe van Stigt - Timmerman & Aannemer">
     <meta name="author" content="Daan Douwe van Stigt">
     <link rel="canonical" href="https://daandouwe.com/bouwen/gallery">
     <meta name="robots" content="index, follow">
@@ -24,32 +24,24 @@
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Gallery - Daan Douwe Bouwen">
-    <meta property="og:description" content="Gallery Daan Douwe van Stigt">
+    <meta property="og:description" content="Gallery - Daan Douwe van Stigt - Timmerman & Aannemer">
     <meta property="og:url" content="https://daandouwe.com/bouwen/gallery">
     <meta property="og:type" content="website">
     <meta property="og:image" content="../android-chrome-512x512.png">
-    <meta property="og:image:alt" content="Daan Douwe van Stigt">
+    <meta property="og:image:alt" content="Daan Douwe van Stigt Gallery">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gallery - Daan Douwe Bouwen">
-    <meta name="twitter:description" content="Gallert Daan Douwe van Stigt">
+    <meta name="twitter:description" content="Gallery - Daan Douwe van Stigt - Timmerman & Aannemer">
     <meta name="twitter:image" content="../android-chrome-512x512.png">
-
-    <!-- Turnstile -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Daan Douwe Bouwen",
-      "description": "Timmerman & Aannemer",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Amsterdam",
-        "addressCountry": "NL"
-      },
+      "@type": "ImageGallery",
+      "name": "Daan Douwe Bouwen Gallery",
+      "description": "Portfolio of work by Daan Douwe van Stigt - Timmerman & Aannemer",
       "url": "https://daandouwe.com/bouwen/gallery"
     }
     </script>
@@ -64,7 +56,7 @@
             </button>
             <div class="dropdown-content" id="dropdownContent">
                 <a href="../">Home</a>
-                <a href="../gallery/" class="active">Gallery</a>
+                <a href="./" class="active">Gallery</a>
                 <a href="../#contact">Contact</a>
             </div>
         </div>
@@ -72,148 +64,26 @@
 
     <!-- Gallery Section -->
     <div id="gallery" class="gallery-section">
+        <h1 class="gallery-heading">Portfolio</h1>
         <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close" id="lightboxClose">&times;</span>
-        <img class="lightbox-content" id="lightboxImage">
+        <img class="lightbox-content" id="lightboxImage" alt="Gallery image">
         <div class="lightbox-nav">
-            <button class="lightbox-prev" id="lightboxPrev"><img src="../drill-round.svg" alt="Previous"></button>
-            <button class="lightbox-next" id="lightboxNext"><img src="../drill-round.svg" alt="Next"></button>
+            <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+                <img src="../drill-round.svg" alt="Previous">
+            </button>
+            <button class="lightbox-next" id="lightboxNext" aria-label="Next image">
+                <img src="../drill-round.svg" alt="Next">
+            </button>
         </div>
     </div>
 
-    <script>
-        const images = [
-            '../images/1.jpeg',
-            '../images/2.jpeg',
-            '../images/21.jpeg',
-            '../images/3.jpeg',
-            '../images/4.jpeg',
-            '../images/5.jpeg',
-            '../images/6.jpeg',
-            '../images/7.jpeg',
-            '../images/8.jpeg',
-            '../images/9.jpeg',
-            '../images/10.jpeg',
-            '../images/11.jpeg',
-            '../images/12.jpeg',
-            '../images/13.jpeg',
-            '../images/14.jpeg',
-            '../images/15.jpeg',
-            '../images/16.jpeg',
-            '../images/17.jpeg',
-            '../images/18.jpeg',
-            '../images/19.jpeg',
-            '../images/20.jpeg',
-            '../images/22.jpeg',
-            '../images/23.jpeg',
-            '../images/24.jpeg',
-            '../images/25.jpeg',
-            '../images/26.jpeg',
-            '../images/27.jpeg',
-            '../images/28.jpeg',
-            '../images/29.jpeg',
-            '../images/30.jpeg',
-            '../images/31.jpeg',
-            '../images/32.jpeg',
-            '../images/33.jpeg',
-            '../images/34.jpeg',
-            '../images/35.jpeg',
-            '../images/36.jpeg',
-        ];
-    
-        // Gallery generation
-        const galleryGrid = document.getElementById('galleryGrid');
-        // een verhaaltje
-        // Skip the logo and create gallery items
-        images.slice(1).forEach((imageSrc, index) => {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            
-            const img = document.createElement('img');
-            img.src = imageSrc;
-            img.alt = `Gallery image ${index + 1}`;
-            img.loading = 'lazy';
-            
-            galleryItem.appendChild(img);
-            galleryItem.addEventListener('click', () => openLightbox(index + 1));
-            galleryGrid.appendChild(galleryItem);
-        });
-    
-        // Lightbox functionality
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxClose = document.getElementById('lightboxClose');
-        const lightboxPrev = document.getElementById('lightboxPrev');
-        const lightboxNext = document.getElementById('lightboxNext');
-        let currentLightboxIndex = 0;
-    
-        function openLightbox(index) {
-            currentLightboxIndex = index;
-            lightboxImage.src = images[index];
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    
-        function showPrevImage() {
-            currentLightboxIndex = currentLightboxIndex > 1 ? currentLightboxIndex - 1 : images.length - 1;
-            lightboxImage.src = images[currentLightboxIndex];
-        }
-    
-        function showNextImage() {
-            currentLightboxIndex = currentLightboxIndex < images.length - 1 ? currentLightboxIndex + 1 : 1;
-            lightboxImage.src = images[currentLightboxIndex];
-        }
-    
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightboxPrev.addEventListener('click', showPrevImage);
-        lightboxNext.addEventListener('click', showNextImage);
-        
-        // Close lightbox when clicking outside image
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') showPrevImage();
-            if (e.key === 'ArrowRight') showNextImage();
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="gallery.js"></script>
 
-    <!-- Navbar -->
-    <script>
-        const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownContent = document.getElementById('dropdownContent');
-        const dropdownArrow = document.getElementById('dropdownArrow');
-
-        dropdownButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdownContent.classList.toggle('show');
-            dropdownArrow.classList.toggle('flipped');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            if (dropdownContent.classList.contains('show')) {
-                dropdownContent.classList.remove('show');
-                dropdownArrow.classList.remove('flipped');
-            }
-        });
-    </script>
-
-    <script src="smooth-scroll-fix.js"></script>
 </body>
 </html>
