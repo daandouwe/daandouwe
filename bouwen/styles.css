@@ -72,13 +72,14 @@ body {
 }
 
 .image-carousel {
-  max-width: 100%;
-  max-height: 100%;          /* fills the slot without changing its size */
+  /* For landscape images, fill width; for portrait, fill height */
+  min-width: 100%;            /* ensures landscape images fill the width */
+  max-height: 100%;           /* prevents overflow vertically */
   width: auto;
   height: auto;
   border-radius: 8px;
   display: block;
-  object-fit: contain;        /* ensures image fits within bounds */
+  object-fit: cover;          /* changed from contain to cover for uniform sizing */
   object-position: center;    /* centers the image */
 }
 
@@ -156,11 +157,11 @@ body {
   }
   
   .image-carousel {
-    max-height: 500px;
-    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
     width: auto;
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
   }
 }
@@ -169,6 +170,7 @@ body {
 @media screen and (max-width: 600px) {
   body {
     padding: 15px;
+    padding-top: 90px;  /* More space at top of page on mobile */
   }
     
   .main-container {
@@ -192,7 +194,7 @@ body {
     height: 500px;
     text-align: center;
     padding: 0;
-    margin-bottom: 30px;
+    margin-bottom: 10px;  /* Reduced from 30px to bring title closer */
     overflow: hidden;
     position: relative;
     display: flex;
@@ -201,7 +203,7 @@ body {
   }
   
   .logo-title {
-    margin-top: 20px;  /* Add space above the title section on mobile */
+    margin-top: 0;  /* Reduced from 20px to bring closer to image */
     margin-bottom: 40px;  /* Add space below for better separation from contact */
   }
   
@@ -213,12 +215,12 @@ body {
   }
   
   .image-carousel {
+    min-width: 90%;
     max-height: 500px;
-    max-width: 90%;
     width: auto;
     height: auto;
     margin: 0 auto;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
   }
   
@@ -259,11 +261,11 @@ body {
   }
   
   .image-carousel {
+    min-width: 90%;
     max-height: 400px;
-    max-width: 90%;
     width: auto;
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
   }
 
@@ -272,7 +274,7 @@ body {
   }
   
   .logo-title {
-    margin-top: 15px;  /* Slightly less margin on very small screens */
+    margin-top: 0;  /* No extra margin on very small screens */
     margin-bottom: 30px;
   }
 }
