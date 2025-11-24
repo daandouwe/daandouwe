@@ -95,11 +95,11 @@ body {
 }
 
 /* Hover effect for carousel - indicates clickable */
-.image-carousel:hover {
-  transform: scale(1.02);     /* Slight zoom on hover */
-  opacity: 0.95;              /* Slight transparency */
-  cursor: pointer;            /* Show pointer cursor */
-}
+/* .image-carousel:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+  cursor: pointer;
+} */
 
 /* Disable hover effects on touch devices to prevent sticky hover */
 @media (hover: none) and (pointer: coarse) {
