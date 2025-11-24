@@ -487,8 +487,8 @@ body {
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 4px;
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -538,13 +538,13 @@ body {
   .lightbox-nav button {
       font-size: 30px;
       padding: 10px;
-      width: 50px;
-      height: 50px;
+      width: 90px;
+      height: 90px;
   }
 
   .lightbox-nav button img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
   }
   
