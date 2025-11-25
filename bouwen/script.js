@@ -151,26 +151,32 @@ if ('ontouchstart' in window) {
 }
 
 
-// Generate QR Code
+// Generate QR Code and make it clickable on Apple devices
 document.addEventListener('DOMContentLoaded', function() {
-    // new QRCode(document.getElementById("qrcode"), {
-    //     text: "https://daandouwe.com/bouwen/card",
-    //     width: 200,
-    //     height: 200,
-    //     colorDark: "#063B40",
-    //     colorLight: "#FFFFFF",
-    //     correctLevel: QRCode.CorrectLevel.H
-    // });
+    // Generate the QR code
+    const qrElement = document.getElementById("qrcode");
+    if (qrElement) {
+        new QRCode(qrElement, {
+            text: "https://daandouwe.com/card",  // Link to your card page
+            width: 120,
+            height: 120,
+            colorDark: "#063B40",
+            colorLight: "#F7ECD6",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
     
     // Check if Apple device (iPhone/iPad)
     const isAppleDevice = /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
     
-    if (isAppleDevice) {
+    if (isAppleDevice && qrElement) {
         // Show hint text
-        document.getElementById('qrHint').style.display = 'block';
+        const hint = document.getElementById('qrHint');
+        if (hint) {
+            hint.style.display = 'block';
+        }
         
         // Make QR code clickable
-        const qrElement = document.getElementById('qrcode');
         qrElement.classList.add('clickable');
         
         // Add click handler to QR code
@@ -181,34 +187,25 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to handle adding to wallet
 async function handleWalletAdd() {
     try {
-        // For production with signed passes (requires Apple certificates):
-        // const response = await fetch('/api/generate-pass');
-        
-        // For now, use the JSON data endpoint:
+        // Try to fetch pass data from Netlify function
         const response = await fetch('/api/pass-data');
         
         if (response.ok) {
             const passData = await response.json();
+            console.log('Pass data generated:', passData);
             
-            // Option 1: Direct download if you have signing set up
-            // const blob = await response.blob();
-            // const url = URL.createObjectURL(blob);
-            // const a = document.createElement('a');
-            // a.href = url;
-            // a.download = 'DaanDouwe.pkpass';
-            // a.click();
+            // For now, just download the vCard as a fallback
+            // When you have Apple certificates, this can generate a real .pkpass file
+            window.location.href = 'card/daandouwe.vcf';
             
-            // Option 2: Show instructions for Pass2U Wallet or similar apps
-            alert('Pass data generated! To add to Apple Wallet:\n\n1. Install "Pass2U Wallet" from App Store\n2. Copy this page URL\n3. Import in the app\n\nOr use the vCard option for direct contact save.');
-            
-            console.log('Pass data:', passData);
         } else {
-            throw new Error('Failed to generate pass');
+            // If API doesn't exist, go directly to vCard
+            window.location.href = 'card/daandouwe.vcf';
         }
     } catch (error) {
         console.error('Error:', error);
-        // Fallback to vCard download
-        window.location.href = 'daandouwe.vcf';
+        // Fallback to vCard download or redirect to card page
+        window.location.href = 'card/';
     }
 }
 
