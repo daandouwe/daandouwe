@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Generate QR code
         try {
             new QRCode(qrElement, {
-                text: "https://daandouwe.com/daandouwe.vcf",
+                text: "https://daandouwe.com/bouwen/daandouwe.vcf",
                 width: 120,
                 height: 120,
                 colorDark: "#063B40",
