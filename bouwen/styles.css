@@ -176,6 +176,48 @@ body {
   filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
 }
 
+.qr-code {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+}
+
+.qr-code img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.qr-code {
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.qr-code.clickable {
+  cursor: pointer;
+}
+
+.qr-code.clickable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.qr-code canvas {
+  display: block !important;
+}
+
+.qr-hint {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #063B40;
+  opacity: 0.7;
+  text-align: center;
+}
+
+
 /* Tablet */
 @media screen and (max-width: 900px) {
   .content-table {

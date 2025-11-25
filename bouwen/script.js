@@ -149,3 +149,83 @@ function onSuccess(token) {
 if ('ontouchstart' in window) {
     document.addEventListener('touchstart', function() {}, {passive: true});
 }
+
+
+// Generate QR Code
+document.addEventListener('DOMContentLoaded', function() {
+    // new QRCode(document.getElementById("qrcode"), {
+    //     text: "https://daandouwe.com/bouwen/card",
+    //     width: 200,
+    //     height: 200,
+    //     colorDark: "#063B40",
+    //     colorLight: "#FFFFFF",
+    //     correctLevel: QRCode.CorrectLevel.H
+    // });
+    
+    // Check if Apple device (iPhone/iPad)
+    const isAppleDevice = /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
+    
+    if (isAppleDevice) {
+        // Show hint text
+        document.getElementById('qrHint').style.display = 'block';
+        
+        // Make QR code clickable
+        const qrElement = document.getElementById('qrcode');
+        qrElement.classList.add('clickable');
+        
+        // Add click handler to QR code
+        qrElement.addEventListener('click', handleWalletAdd);
+    }
+});
+
+// Function to handle adding to wallet
+async function handleWalletAdd() {
+    try {
+        // For production with signed passes (requires Apple certificates):
+        // const response = await fetch('/api/generate-pass');
+        
+        // For now, use the JSON data endpoint:
+        const response = await fetch('/api/pass-data');
+        
+        if (response.ok) {
+            const passData = await response.json();
+            
+            // Option 1: Direct download if you have signing set up
+            // const blob = await response.blob();
+            // const url = URL.createObjectURL(blob);
+            // const a = document.createElement('a');
+            // a.href = url;
+            // a.download = 'DaanDouwe.pkpass';
+            // a.click();
+            
+            // Option 2: Show instructions for Pass2U Wallet or similar apps
+            alert('Pass data generated! To add to Apple Wallet:\n\n1. Install "Pass2U Wallet" from App Store\n2. Copy this page URL\n3. Import in the app\n\nOr use the vCard option for direct contact save.');
+            
+            console.log('Pass data:', passData);
+        } else {
+            throw new Error('Failed to generate pass');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        // Fallback to vCard download
+        window.location.href = 'daandouwe.vcf';
+    }
+}
+
+// Share functionality
+function shareCard() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Daan Douwe Bouwen',
+            text: 'Timmerman & Aannemer - Contact Card',
+            url: window.location.href
+        }).catch(err => console.log('Error sharing:', err));
+    } else {
+        // Fallback - copy to clipboard
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+    }
+}
+
+// Apple Wallet functionality using Netlify function
+document.getElementById('addToWallet')?.addEventListener('click', handleWalletAdd);
