@@ -95,11 +95,11 @@ body {
 }
 
 /* Hover effect for carousel - indicates clickable */
-/* .image-carousel:hover {
-  transform: scale(1.02);
-  opacity: 0.95;
-  cursor: pointer;
-} */
+.image-carousel:hover {
+  transform: scale(1.02);     /* Slight zoom on hover */
+  opacity: 0.95;              /* Slight transparency */
+  cursor: pointer;            /* Show pointer cursor */
+}
 
 /* Disable hover effects on touch devices to prevent sticky hover */
 @media (hover: none) and (pointer: coarse) {
@@ -181,7 +181,7 @@ body {
   height: 120px;
   margin: 30px auto;
   padding: 15px;
-  background: white;
+  /* background: white; */
   border-radius: 8px;
   display: inline-block;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -191,7 +191,7 @@ body {
 .qr-code canvas {
   width: 100% !important;
   height: 100% !important;
-  display: block !important;
+  /* display: block !important; */
 }
 
 .qr-code.clickable {
@@ -371,8 +371,8 @@ body {
   
   /* Top left logo on very small screens */
   .top-logo {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -398,8 +398,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -701,8 +701,8 @@ body {
   
   /* Top left logo on mobile */
   .top-logo {
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     top: 12px;
     left: 15px;
   }
