@@ -181,18 +181,18 @@ body {
   height: 120px;
   margin: 30px auto;
   padding: 15px;
-  /* background: white; */
+  background: #F7ECD6;
   border-radius: 8px;
   display: inline-block;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.qr-code img,
-.qr-code canvas {
-  width: 100% !important;
-  height: 100% !important;
+/* .qr-code img, */
+/* .qr-code canvas { */
+  /* width: 100% !important; */
+  /* height: 100% !important; */
   /* display: block !important; */
-}
+/* } */
 
 .qr-code.clickable {
   cursor: pointer;
