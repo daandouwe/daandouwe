@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card - Daan Douwe Bouwen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles.css" media="screen">
+    
+    <!-- SEO -->
+    <meta name="description" content="Digital Business Card - Daan Douwe van Stigt - Timmerman & Aannemer">
+    <meta property="og:title" content="Daan Douwe Bouwen - Business Card">
+    <meta property="og:description" content="Save my contact details - Timmerman & Aannemer">
+    
+    <style>
+        .card-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-box {
+            background: #F7ECD6;
+            border: 2px solid #063B40;
+            border-radius: 12px;
+            padding: 40px 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .card-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.2));  /* Round shadow that follows the SVG shape */
+        }
+        
+        .card-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .card-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #063B40;
+            margin: 10px 0;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            color: #555;
+            margin: 10px 0 20px;
+        }
+        
+        .card-info {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+        
+        .card-info a {
+            color: #2d5f4f;
+            text-decoration: none;
+        }
+        
+        .card-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .qr-code {
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        /* .qr-code canvas {
+            display: block !important;
+        } */
+        
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .action-button {
+            display: block;
+            padding: 15px 25px;
+            background: #063B40;
+            color: #F7ECD6;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: times, serif;
+        }
+        
+        .action-button:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        
+        .action-button.secondary {
+            background: transparent;
+            color: #063B40;
+            border: 2px solid #063B40;
+        }
+        
+        .apple-wallet-btn {
+            background: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .instructions {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(6, 59, 64, 0.05);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .card-box {
+                padding: 30px 20px;
+            }
+            
+            .card-name {
+                font-size: 22px;
+            }
+            
+            .card-title {
+                font-size: 16px;
+            }
+            
+            .card-info {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Left Logo -->
+    <a href="../" class="top-logo">
+        <img src="../logo-dd.svg" alt="Daan Douwe Logo">
+    </a>
+    
+    <!-- Fixed Navbar -->
+    <nav class="navbar">
+        <div class="dropdown">
+            <button class="dropdown-button" id="dropdownButton">
+                <img src="../favicon-round.svg" alt="Menu" class="dropdown-arrow" id="dropdownArrow">
+            </button>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="../">Home</a>
+                <a href="../gallery/">Gallery</a>
+                <a href="../#contact">Contact</a>
+                <a href="./" class="active">Card</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="card-container">
+        <!-- Digital Business Card -->
+        <div class="card-logo">
+            <img src="../face-round.svg" alt="Logo">
+        </div>
+        
+        <div class="card-name">Daan Douwe van Stigt</div>
+        <div class="card-title">Timmerman & Aannemer</div>
+
+        <!-- QR Code -->
+        <div class="qr-code" id="qrcode"></div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="daandouwe.vcf" download class="action-button">
+                Save to Contacts
+            </a>
+            
+            <button class="action-button apple-wallet-btn" id="addToWallet" style="display:none;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.5 3C2.67 3 2 3.67 2 4.5V19.5C2 20.33 2.67 21 3.5 21H20.5C21.33 21 22 20.33 22 19.5V4.5C22 3.67 21.33 3 20.5 3H3.5Z"/>
+                </svg>
+                Add to Apple Wallet
+            </button>
+            
+            <button class="action-button secondary" onclick="shareCard()">
+                Share Card
+            </button>
+        </div>
+
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <script>
+        // Generate QR Code
+        document.addEventListener('DOMContentLoaded', function() {
+            new QRCode(document.getElementById("qrcode"), {
+                text: "https://daandouwe.com/bouwen/card",
+                width: 200,
+                height: 200,
+                colorDark: "#063B40",
+                colorLight: "#FFFFFF",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            // Check if Apple Wallet is available (iOS Safari)
+            if (window.navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                document.getElementById('addToWallet').style.display = 'flex';
+            }
+        });
+        
+        // Share functionality
+        function shareCard() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Daan Douwe Bouwen',
+                    text: 'Timmerman & Aannemer - Contact Card',
+                    url: window.location.href
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        }
+        
+        // Apple Wallet functionality (placeholder - needs backend)
+        document.getElementById('addToWallet')?.addEventListener('click', function() {
+            // This would typically call your backend to generate a .pkpass file
+            alert('Apple Wallet pass generation requires server setup. Contact info can be saved using the vCard option above.');
+        });
+    </script>
+    
+    <!-- Dropdown menu script -->
+    <script>
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const dropdownArrow = document.getElementById('dropdownArrow');
+
+        dropdownButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('show');
+            dropdownArrow.classList.toggle('flipped');
+        });
+
+        document.addEventListener('click', function() {
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+                dropdownArrow.classList.remove('flipped');
+            }
+        });
+    </script>
+</body>
+</html>

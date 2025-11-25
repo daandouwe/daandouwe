@@ -1,0 +1,15 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Daan Douwe van Stigt
+N:van Stigt;Daan;Douwe;;
+ORG:Daan Douwe Bouwen
+TITLE:Timmerman & Aannemer
+TEL;TYPE=WORK:+31 6 49307365
+EMAIL;TYPE=WORK:bouwen@daandouwe.com
+URL:https://daandouwe.com/bouwen
+ADR;TYPE=WORK:;;;;;;Amsterdam;Nederland
+NOTE:Timmerman & Aannemer - I build things
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/daan-🔨-van-stigt-713772133/
+X-SOCIALPROFILE;TYPE=github:https://github.com/daandouwe
+REV:20251124T000000Z
+END:VCARD

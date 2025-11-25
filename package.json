@@ -1,0 +1,14 @@
+{
+    "name": "daandouwe-functions",
+    "version": "1.0.0",
+    "description": "Netlify functions for Daan Douwe Bouwen website",
+    "scripts": {
+      "build": "netlify-lambda build netlify/functions"
+    },
+    "dependencies": {
+      "passkit-generator": "^3.1.0"
+    },
+    "devDependencies": {
+      "netlify-lambda": "^2.0.0"
+    }
+  }

@@ -1,0 +1,57 @@
+# netlify.toml
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+[functions]
+  directory = "netlify/functions"
+
+# Security headers for all routes
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+# Cache control for CSS files
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# CORS headers for Netlify functions
+[[headers]]
+  for = "/netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+
+# API redirects for cleaner URLs
+[[redirects]]
+  from = "/api/generate-pass"
+  to = "/.netlify/functions/generate-pass"
+  status = 200
+
+[[redirects]]
+  from = "/api/pass-data"
+  to = "/.netlify/functions/get-pass-data"
+  status = 200
