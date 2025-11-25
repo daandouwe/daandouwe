@@ -1,6 +1,9 @@
-// Image carousel functionality
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Image carousel setup
+    
+    // =====================================
+    // 1. IMAGE CAROUSEL
+    // =====================================
     const images = [
         'logo-large.svg',
         'images/1.jpeg',
@@ -49,32 +52,33 @@ document.addEventListener('DOMContentLoaded', function() {
             imgElement.src = images[currentIndex];
             currentIndex = (currentIndex + 1) % images.length;
             
-            // If we just showed the first image, wait 6 seconds. Otherwise wait 1 second.
+            // First image waits 6 seconds, others wait 1 second
             const delay = currentIndex === 1 ? 6000 : 1000;
             setTimeout(rotateImage, delay);
         }
     }
 
-    // Start image rotation if element exists
+    // Start carousel and make it clickable
     if (imgElement) {
         rotateImage();
         
-        // Make the image carousel clickable to go to gallery
+        // Make carousel clickable to go to gallery
         imgElement.style.cursor = 'pointer';
         imgElement.addEventListener('click', function() {
             window.location.href = 'gallery/';
         });
-        
-        // Optional: Add title attribute for better UX
         imgElement.title = 'Click to view gallery';
     }
 
-    // Dropdown menu functionality
+    // =====================================
+    // 2. DROPDOWN MENU
+    // =====================================
     const dropdownButton = document.getElementById('dropdownButton');
     const dropdownContent = document.getElementById('dropdownContent');
     const dropdownArrow = document.getElementById('dropdownArrow');
 
     if (dropdownButton && dropdownContent && dropdownArrow) {
+        // Toggle dropdown on button click
         dropdownButton.addEventListener('click', function(e) {
             e.stopPropagation();
             dropdownContent.classList.toggle('show');
@@ -90,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Smooth scroll fix for mobile dropdown menu
+    // Smooth scroll for anchor links in dropdown
     const dropdownLinks = document.querySelectorAll('.dropdown-content a[href^="#"], .dropdown-content a[href*="#"]');
     
     dropdownLinks.forEach(link => {
@@ -98,40 +102,80 @@ document.addEventListener('DOMContentLoaded', function() {
             const href = this.getAttribute('href');
             
             // Check if it's a hash link on the same page
-            if (href.startsWith('#') || (this.href && new URL(this.href, window.location.href).pathname === window.location.pathname)) {
-                const hash = href.startsWith('#') ? href : new URL(this.href, window.location.href).hash;
-                const targetSection = document.querySelector(hash);
+            if (href.startsWith('#')) {
+                const targetSection = document.querySelector(href);
                 
                 if (targetSection) {
                     e.preventDefault();
                     
-                    // Close the dropdown menu
+                    // Close dropdown
                     if (dropdownContent) {
                         dropdownContent.classList.remove('show');
                         dropdownArrow.classList.remove('flipped');
                     }
                     
-                    // Calculate offset for fixed header
+                    // Smooth scroll with offset for fixed header
                     const offset = 80;
                     const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
                     
-                    // Smooth scroll with offset
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
                     
-                    // Update URL
                     if (history.pushState) {
-                        history.pushState(null, null, hash);
+                        history.pushState(null, null, href);
                     }
                 }
             }
         });
     });
+
+    // =====================================
+    // 3. QR CODE GENERATION & CLICK HANDLER
+    // =====================================
+    const qrElement = document.getElementById('qrcode');
+    
+    if (qrElement) {
+        // Generate QR code
+        try {
+            new QRCode(qrElement, {
+                text: "https://daandouwe.com/card",
+                width: 120,
+                height: 120,
+                colorDark: "#063B40",
+                colorLight: "#F7ECD6",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        } catch (error) {
+            console.error('Error generating QR code:', error);
+        }
+
+        // Make QR clickable on Apple devices
+        const isAppleDevice = /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
+        
+        if (isAppleDevice) {
+            // Show hint text
+            const hint = document.getElementById('qrHint');
+            if (hint) {
+                hint.style.display = 'block';
+            }
+            
+            // Make QR code clickable
+            qrElement.classList.add('clickable');
+            
+            // Add click handler
+            qrElement.addEventListener('click', function() {
+                // Try to go to card page or download vCard
+                window.location.href = 'card/';
+            });
+        }
+    }
 });
 
-// Turnstile callback function (needs to be global for the widget)
+// =====================================
+// TURNSTILE CALLBACK
+// =====================================
 function onSuccess(token) {
     const contactInfo = document.getElementById('contact-turnstile');
     const turnstileWidget = document.querySelector('.cf-turnstile');
@@ -145,84 +189,9 @@ function onSuccess(token) {
     }
 }
 
-// Additional fix for iOS Safari smooth scrolling
+// =====================================
+// iOS SAFARI FIX
+// =====================================
 if ('ontouchstart' in window) {
     document.addEventListener('touchstart', function() {}, {passive: true});
 }
-
-
-// Generate QR Code and make it clickable on Apple devices
-document.addEventListener('DOMContentLoaded', function() {
-    // Generate the QR code
-    const qrElement = document.getElementById("qrcode");
-    if (qrElement) {
-        new QRCode(qrElement, {
-            text: "https://daandouwe.com/card",  // Link to your card page
-            width: 120,
-            height: 120,
-            colorDark: "#063B40",
-            colorLight: "#F7ECD6",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-    }
-    
-    // Check if Apple device (iPhone/iPad)
-    const isAppleDevice = /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
-    
-    if (isAppleDevice && qrElement) {
-        // Show hint text
-        const hint = document.getElementById('qrHint');
-        if (hint) {
-            hint.style.display = 'block';
-        }
-        
-        // Make QR code clickable
-        qrElement.classList.add('clickable');
-        
-        // Add click handler to QR code
-        qrElement.addEventListener('click', handleWalletAdd);
-    }
-});
-
-// Function to handle adding to wallet
-async function handleWalletAdd() {
-    try {
-        // Try to fetch pass data from Netlify function
-        const response = await fetch('/api/pass-data');
-        
-        if (response.ok) {
-            const passData = await response.json();
-            console.log('Pass data generated:', passData);
-            
-            // For now, just download the vCard as a fallback
-            // When you have Apple certificates, this can generate a real .pkpass file
-            window.location.href = 'card/daandouwe.vcf';
-            
-        } else {
-            // If API doesn't exist, go directly to vCard
-            window.location.href = 'card/daandouwe.vcf';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        // Fallback to vCard download or redirect to card page
-        window.location.href = 'card/';
-    }
-}
-
-// Share functionality
-function shareCard() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Daan Douwe Bouwen',
-            text: 'Timmerman & Aannemer - Contact Card',
-            url: window.location.href
-        }).catch(err => console.log('Error sharing:', err));
-    } else {
-        // Fallback - copy to clipboard
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied to clipboard!');
-    }
-}
-
-// Apple Wallet functionality using Netlify function
-document.getElementById('addToWallet')?.addEventListener('click', handleWalletAdd);
