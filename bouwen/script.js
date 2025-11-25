@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Generate QR code
         try {
             new QRCode(qrElement, {
-                text: "https://daandouwe.com/card/daandouwe.vcf",
+                text: "https://daandouwe.com/daandouwe.vcf",
                 width: 120,
                 height: 120,
                 colorDark: "#063B40",
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add click handler
             qrElement.addEventListener('click', function() {
                 // Try to go to card page or download vCard
-                window.location.href = 'card/';
+                window.location.href = 'daandouwe.vcf';
             });
         }
     }
