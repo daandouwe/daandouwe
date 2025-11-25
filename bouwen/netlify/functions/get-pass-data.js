@@ -96,7 +96,7 @@ exports.handler = async (event, context) => {
       
       barcode: {
         format: 'PKBarcodeFormatQR',
-        message: 'https://daandouwe.com/bouwen/card',
+        message: 'https://daandouwe.com/bouwen/daandouwe.vcf',
         messageEncoding: 'iso-8859-1',
         altText: 'daandouwe.com'
       }
