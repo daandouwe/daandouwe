@@ -306,6 +306,7 @@
             <div class="existing-images" id="existingImages">
                 <div class="loading">Laden...</div>
             </div>
+            <button class="btn btn-danger" id="deleteAllBtn" style="margin-top: 20px; display: none;">Alles Verwijderen</button>
 
             <p style="margin-top: 30px; text-align: center;">
                 <a href="./">Terug naar Home</a> | <a href="./gallery/">Bekijk Gallery</a>
@@ -384,6 +385,9 @@
         const folderInput = document.getElementById('folder');
         const existingImagesContainer = document.getElementById('existingImages');
         const imageCount = document.getElementById('imageCount');
+        const deleteAllBtn = document.getElementById('deleteAllBtn');
+
+        let allImages = [];
 
         let selectedFiles = [];
 
@@ -533,13 +537,16 @@
         }
 
         function renderExistingImages(images) {
+            allImages = images;
             imageCount.textContent = `${images.length} foto('s) in portfolio`;
 
             if (images.length === 0) {
                 existingImagesContainer.innerHTML = '<div class="loading">Geen foto\'s gevonden</div>';
+                deleteAllBtn.style.display = 'none';
                 return;
             }
 
+            deleteAllBtn.style.display = 'block';
             existingImagesContainer.innerHTML = images.map(img => `
                 <div class="image-card" data-id="${img.id}">
                     <img src="${img.thumbnail}" alt="Portfolio image">
@@ -596,6 +603,63 @@
 
         // Make deleteImage available globally
         window.deleteImage = deleteImage;
+
+        // Delete all images
+        deleteAllBtn.addEventListener('click', async () => {
+            if (allImages.length === 0) return;
+
+            const count = allImages.length;
+
+            // First confirmation
+            if (!confirm(`Weet je zeker dat je ALLE ${count} foto('s) wilt verwijderen?`)) {
+                return;
+            }
+
+            // Second confirmation - type to confirm
+            const confirmText = prompt(`Dit is onomkeerbaar! Type "verwijder alles" om te bevestigen:`);
+            if (confirmText !== 'verwijder alles') {
+                alert('Verwijderen geannuleerd.');
+                return;
+            }
+
+            deleteAllBtn.disabled = true;
+            deleteAllBtn.textContent = `Verwijderen... 0/${count}`;
+
+            let deleted = 0;
+            let failed = 0;
+
+            for (const img of allImages) {
+                try {
+                    const response = await fetch('/api/delete-image', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ public_id: img.id })
+                    });
+
+                    if (response.ok) {
+                        deleted++;
+                    } else {
+                        failed++;
+                    }
+                } catch (error) {
+                    console.error('Delete error:', error);
+                    failed++;
+                }
+
+                deleteAllBtn.textContent = `Verwijderen... ${deleted + failed}/${count}`;
+            }
+
+            deleteAllBtn.disabled = false;
+            deleteAllBtn.textContent = 'Alles Verwijderen';
+
+            if (failed === 0) {
+                alert(`Alle ${deleted} foto('s) zijn verwijderd.`);
+            } else {
+                alert(`${deleted} verwijderd, ${failed} mislukt.`);
+            }
+
+            loadExistingImages();
+        });
     </script>
 </body>
 </html>
