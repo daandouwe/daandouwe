@@ -1,2 +1,8 @@
 /bouwen    /bouwen.html    200
+
+# API routes (must be before catch-all)
+/api/verify-password  /.netlify/functions/verify-upload-password  200
+/api/images           /.netlify/functions/cloudinary-images       200
+/api/pass-data        /.netlify/functions/get-pass-data           200
+
 /*         /index.html     404
