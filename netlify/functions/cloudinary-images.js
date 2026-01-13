@@ -30,9 +30,9 @@ exports.handler = async (event, context) => {
     // Fetch images from Cloudinary Admin API
     const images = await fetchCloudinaryImages(cloudName, apiKey, apiSecret, folder);
 
-    // Transform to optimized URLs (higher quality settings)
+    // Transform to optimized URLs (high resolution, high quality)
     const imageUrls = images.map(img => ({
-      url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_90,w_800/${img.public_id}.${img.format}`,
+      url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_90,w_1200/${img.public_id}.${img.format}`,
       thumbnail: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_85,w_400,c_fill/${img.public_id}.${img.format}`,
       full: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_95/${img.public_id}.${img.format}`,
       id: img.public_id,
@@ -74,11 +74,9 @@ function fetchCloudinaryImages(cloudName, apiKey, apiSecret, folder) {
         try {
           const parsed = JSON.parse(data);
           if (parsed.resources) {
-            // Sort by filename (assumes numeric naming like 1.jpeg, 2.jpeg)
+            // Sort by upload date (newest first)
             const sorted = parsed.resources.sort((a, b) => {
-              const numA = parseInt(a.public_id.split('/').pop()) || 0;
-              const numB = parseInt(b.public_id.split('/').pop()) || 0;
-              return numA - numB;
+              return new Date(b.created_at) - new Date(a.created_at);
             });
             resolve(sorted);
           } else {
