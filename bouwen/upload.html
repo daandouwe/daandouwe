@@ -27,6 +27,53 @@
             color: #666;
             margin-bottom: 30px;
         }
+        .hidden {
+            display: none !important;
+        }
+        .login-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .login-section input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .login-section input:focus {
+            border-color: #063B40;
+            outline: none;
+        }
+        .login-btn {
+            background: #063B40;
+            color: #F7ECD6;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .login-error {
+            color: #721c24;
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .login-error.show {
+            display: block;
+        }
         .upload-area {
             border: 3px dashed #063B40;
             border-radius: 12px;
@@ -144,40 +191,108 @@
         <h1>Portfolio Upload</h1>
         <p class="subtitle">Upload foto's naar je portfolio</p>
 
-        <div class="config" id="configSection">
-            <label for="cloudName">Cloudinary Cloud Name</label>
-            <input type="text" id="cloudName" placeholder="bijv. dxxxxx">
-
-            <label for="uploadPreset">Upload Preset</label>
-            <input type="text" id="uploadPreset" placeholder="bijv. portfolio-upload" value="portfolio-upload">
-
-            <label for="folder">Folder</label>
-            <input type="text" id="folder" placeholder="bijv. portfolio" value="portfolio">
-
-            <p class="save-config">Deze instellingen worden opgeslagen in je browser.</p>
+        <!-- Login Section -->
+        <div class="login-section" id="loginSection">
+            <p>Voer wachtwoord in om door te gaan</p>
+            <div class="login-error" id="loginError">Onjuist wachtwoord</div>
+            <input type="password" id="passwordInput" placeholder="Wachtwoord" autocomplete="off">
+            <button class="login-btn" id="loginBtn">Inloggen</button>
         </div>
 
-        <div class="upload-area" id="uploadArea">
-            <input type="file" id="fileInput" accept="image/*" multiple>
-            <p>Tik om foto's te selecteren<br>of sleep ze hierheen</p>
+        <!-- Upload Section (hidden until logged in) -->
+        <div id="uploadSection" class="hidden">
+            <div class="config" id="configSection">
+                <label for="cloudName">Cloudinary Cloud Name</label>
+                <input type="text" id="cloudName" placeholder="bijv. dxxxxx">
+
+                <label for="uploadPreset">Upload Preset</label>
+                <input type="text" id="uploadPreset" placeholder="bijv. portfolio-upload" value="portfolio-upload">
+
+                <label for="folder">Folder</label>
+                <input type="text" id="folder" placeholder="bijv. portfolio" value="portfolio">
+
+                <p class="save-config">Deze instellingen worden opgeslagen in je browser.</p>
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/*" multiple>
+                <p>Tik om foto's te selecteren<br>of sleep ze hierheen</p>
+            </div>
+
+            <div class="preview" id="preview"></div>
+
+            <div class="progress" id="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="status" id="status"></div>
+
+            <button class="upload-btn" id="uploadBtn" disabled>Upload Foto's</button>
+
+            <p style="margin-top: 30px; text-align: center;">
+                <a href="./">Terug naar Home</a> | <a href="./gallery/">Bekijk Gallery</a>
+            </p>
         </div>
-
-        <div class="preview" id="preview"></div>
-
-        <div class="progress" id="progress">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <div class="status" id="status"></div>
-
-        <button class="upload-btn" id="uploadBtn" disabled>Upload Foto's</button>
-
-        <p style="margin-top: 30px; text-align: center;">
-            <a href="./">Terug naar Home</a> | <a href="./gallery/">Bekijk Gallery</a>
-        </p>
     </div>
 
     <script>
+        // Elements
+        const loginSection = document.getElementById('loginSection');
+        const uploadSection = document.getElementById('uploadSection');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginError = document.getElementById('loginError');
+
+        // Check if already authenticated this session
+        if (sessionStorage.getItem('upload_authenticated') === 'true') {
+            showUploadSection();
+        }
+
+        // Login handling
+        loginBtn.addEventListener('click', verifyPassword);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') verifyPassword();
+        });
+
+        async function verifyPassword() {
+            const password = passwordInput.value;
+            if (!password) return;
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Controleren...';
+            loginError.classList.remove('show');
+
+            try {
+                const response = await fetch('/api/verify-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                if (response.ok) {
+                    sessionStorage.setItem('upload_authenticated', 'true');
+                    showUploadSection();
+                } else {
+                    loginError.classList.add('show');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                loginError.textContent = 'Er ging iets mis. Probeer opnieuw.';
+                loginError.classList.add('show');
+            }
+
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Inloggen';
+        }
+
+        function showUploadSection() {
+            loginSection.classList.add('hidden');
+            uploadSection.classList.remove('hidden');
+        }
+
+        // Upload functionality
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
         const preview = document.getElementById('preview');

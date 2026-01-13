@@ -47,6 +47,11 @@
 
 # API redirects for cleaner URLs
 [[redirects]]
+  from = "/api/verify-password"
+  to = "/.netlify/functions/verify-upload-password"
+  status = 200
+
+[[redirects]]
   from = "/api/images"
   to = "/.netlify/functions/cloudinary-images"
   status = 200
