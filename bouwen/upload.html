@@ -16,12 +16,18 @@
             min-height: 100vh;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
         }
-        h1 {
+        h1, h2 {
             font-size: 24px;
             margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-top: 40px;
+            border-bottom: 2px solid #063B40;
+            padding-bottom: 10px;
         }
         .subtitle {
             color: #666;
@@ -89,7 +95,7 @@
         .upload-area input {
             display: none;
         }
-        .upload-btn {
+        .btn {
             background: #063B40;
             color: #F7ECD6;
             border: none;
@@ -100,9 +106,12 @@
             width: 100%;
             margin-top: 10px;
         }
-        .upload-btn:disabled {
+        .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+        .btn-danger {
+            background: #dc3545;
         }
         .preview {
             display: flex;
@@ -184,6 +193,68 @@
         a {
             color: #063B40;
         }
+
+        /* Existing images grid */
+        .existing-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .image-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .image-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+        .image-card .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            opacity: 0.9;
+        }
+        .image-card .delete-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .image-card.deleting {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .image-card .image-name {
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .image-count {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -197,6 +268,9 @@
 
         <!-- Upload Section (hidden until logged in) -->
         <div id="uploadSection" class="hidden">
+            <h1>Portfolio Beheer</h1>
+            <p class="subtitle">Upload en beheer je portfolio foto's</p>
+
             <div class="config" id="configSection">
                 <label for="cloudName">Cloudinary Cloud Name</label>
                 <input type="text" id="cloudName" placeholder="bijv. dxxxxx">
@@ -209,6 +283,8 @@
 
                 <p class="save-config">Deze instellingen worden opgeslagen in je browser.</p>
             </div>
+
+            <h2>Upload nieuwe foto's</h2>
 
             <div class="upload-area" id="uploadArea">
                 <input type="file" id="fileInput" accept="image/*" multiple>
@@ -223,7 +299,13 @@
 
             <div class="status" id="status"></div>
 
-            <button class="upload-btn" id="uploadBtn" disabled>Upload Foto's</button>
+            <button class="btn" id="uploadBtn" disabled>Upload Foto's</button>
+
+            <h2>Bestaande foto's</h2>
+            <div class="image-count" id="imageCount"></div>
+            <div class="existing-images" id="existingImages">
+                <div class="loading">Laden...</div>
+            </div>
 
             <p style="margin-top: 30px; text-align: center;">
                 <a href="./">Terug naar Home</a> | <a href="./gallery/">Bekijk Gallery</a>
@@ -286,6 +368,7 @@
         function showUploadSection() {
             loginSection.classList.add('hidden');
             uploadSection.classList.remove('hidden');
+            loadExistingImages();
         }
 
         // Upload functionality
@@ -299,6 +382,8 @@
         const cloudNameInput = document.getElementById('cloudName');
         const uploadPresetInput = document.getElementById('uploadPreset');
         const folderInput = document.getElementById('folder');
+        const existingImagesContainer = document.getElementById('existingImages');
+        const imageCount = document.getElementById('imageCount');
 
         let selectedFiles = [];
 
@@ -424,7 +509,93 @@
             }
 
             uploadBtn.disabled = true;
+
+            // Reload existing images
+            loadExistingImages();
         });
+
+        // Load existing images from Cloudinary
+        async function loadExistingImages() {
+            existingImagesContainer.innerHTML = '<div class="loading">Laden...</div>';
+
+            try {
+                const response = await fetch('/api/images');
+                if (response.ok) {
+                    const data = await response.json();
+                    renderExistingImages(data.images || []);
+                } else {
+                    existingImagesContainer.innerHTML = '<div class="loading">Kon afbeeldingen niet laden</div>';
+                }
+            } catch (error) {
+                console.error('Failed to load images:', error);
+                existingImagesContainer.innerHTML = '<div class="loading">Fout bij laden</div>';
+            }
+        }
+
+        function renderExistingImages(images) {
+            imageCount.textContent = `${images.length} foto('s) in portfolio`;
+
+            if (images.length === 0) {
+                existingImagesContainer.innerHTML = '<div class="loading">Geen foto\'s gevonden</div>';
+                return;
+            }
+
+            existingImagesContainer.innerHTML = images.map(img => `
+                <div class="image-card" data-id="${img.id}">
+                    <img src="${img.thumbnail}" alt="Portfolio image">
+                    <button class="delete-btn" onclick="deleteImage('${img.id}')" title="Verwijderen">&times;</button>
+                    <div class="image-name">${img.id.split('/').pop()}</div>
+                </div>
+            `).join('');
+        }
+
+        // Delete image
+        async function deleteImage(publicId) {
+            if (!confirm('Weet je zeker dat je deze foto wilt verwijderen?')) {
+                return;
+            }
+
+            const card = document.querySelector(`[data-id="${publicId}"]`);
+            if (card) {
+                card.classList.add('deleting');
+            }
+
+            try {
+                const response = await fetch('/api/delete-image', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ public_id: publicId })
+                });
+
+                if (response.ok) {
+                    // Remove from DOM
+                    if (card) {
+                        card.remove();
+                    }
+                    // Update count
+                    const remaining = document.querySelectorAll('.image-card').length;
+                    imageCount.textContent = `${remaining} foto('s) in portfolio`;
+
+                    if (remaining === 0) {
+                        existingImagesContainer.innerHTML = '<div class="loading">Geen foto\'s gevonden</div>';
+                    }
+                } else {
+                    alert('Verwijderen mislukt. Probeer opnieuw.');
+                    if (card) {
+                        card.classList.remove('deleting');
+                    }
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('Verwijderen mislukt. Probeer opnieuw.');
+                if (card) {
+                    card.classList.remove('deleting');
+                }
+            }
+        }
+
+        // Make deleteImage available globally
+        window.deleteImage = deleteImage;
     </script>
 </body>
 </html>
