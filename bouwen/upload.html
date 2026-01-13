@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Daan Douwe Bouwen</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F7ECD6;
+            color: #063B40;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .upload-area {
+            border: 3px dashed #063B40;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .upload-area:hover, .upload-area.dragover {
+            background: rgba(6, 59, 64, 0.1);
+        }
+        .upload-area input {
+            display: none;
+        }
+        .upload-btn {
+            background: #063B40;
+            color: #F7ECD6;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .upload-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .preview img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        .status.uploading {
+            background: #fff3cd;
+            color: #856404;
+            display: block;
+        }
+        .progress {
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+            display: none;
+        }
+        .progress.show {
+            display: block;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #063B40;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .config {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .config label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .config input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .config input:focus {
+            border-color: #063B40;
+            outline: none;
+        }
+        .save-config {
+            font-size: 14px;
+            color: #666;
+        }
+        a {
+            color: #063B40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Portfolio Upload</h1>
+        <p class="subtitle">Upload foto's naar je portfolio</p>
+
+        <div class="config" id="configSection">
+            <label for="cloudName">Cloudinary Cloud Name</label>
+            <input type="text" id="cloudName" placeholder="bijv. dxxxxx">
+
+            <label for="uploadPreset">Upload Preset</label>
+            <input type="text" id="uploadPreset" placeholder="bijv. portfolio-upload" value="portfolio-upload">
+
+            <label for="folder">Folder</label>
+            <input type="text" id="folder" placeholder="bijv. portfolio" value="portfolio">
+
+            <p class="save-config">Deze instellingen worden opgeslagen in je browser.</p>
+        </div>
+
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <p>Tik om foto's te selecteren<br>of sleep ze hierheen</p>
+        </div>
+
+        <div class="preview" id="preview"></div>
+
+        <div class="progress" id="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <button class="upload-btn" id="uploadBtn" disabled>Upload Foto's</button>
+
+        <p style="margin-top: 30px; text-align: center;">
+            <a href="./">Terug naar Home</a> | <a href="./gallery/">Bekijk Gallery</a>
+        </p>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const status = document.getElementById('status');
+        const progress = document.getElementById('progress');
+        const progressBar = document.getElementById('progressBar');
+        const cloudNameInput = document.getElementById('cloudName');
+        const uploadPresetInput = document.getElementById('uploadPreset');
+        const folderInput = document.getElementById('folder');
+
+        let selectedFiles = [];
+
+        // Load saved config
+        cloudNameInput.value = localStorage.getItem('cloudinary_cloud_name') || '';
+        uploadPresetInput.value = localStorage.getItem('cloudinary_upload_preset') || 'portfolio-upload';
+        folderInput.value = localStorage.getItem('cloudinary_folder') || 'portfolio';
+
+        // Save config on change
+        [cloudNameInput, uploadPresetInput, folderInput].forEach(input => {
+            input.addEventListener('change', () => {
+                localStorage.setItem('cloudinary_cloud_name', cloudNameInput.value);
+                localStorage.setItem('cloudinary_upload_preset', uploadPresetInput.value);
+                localStorage.setItem('cloudinary_folder', folderInput.value);
+            });
+        });
+
+        // Click to select files
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        // File selection
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            selectedFiles = Array.from(files);
+            preview.innerHTML = '';
+
+            selectedFiles.forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                preview.appendChild(img);
+            });
+
+            uploadBtn.disabled = selectedFiles.length === 0 || !cloudNameInput.value;
+            status.className = 'status';
+        }
+
+        // Check if upload button should be enabled
+        cloudNameInput.addEventListener('input', () => {
+            uploadBtn.disabled = selectedFiles.length === 0 || !cloudNameInput.value;
+        });
+
+        // Upload
+        uploadBtn.addEventListener('click', async () => {
+            const cloudName = cloudNameInput.value.trim();
+            const uploadPreset = uploadPresetInput.value.trim();
+            const folder = folderInput.value.trim();
+
+            if (!cloudName || !uploadPreset) {
+                status.textContent = 'Vul eerst je Cloudinary instellingen in.';
+                status.className = 'status error';
+                return;
+            }
+
+            uploadBtn.disabled = true;
+            progress.classList.add('show');
+            status.textContent = 'Uploading...';
+            status.className = 'status uploading';
+
+            let uploaded = 0;
+            let failed = 0;
+
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const file = selectedFiles[i];
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', uploadPreset);
+                if (folder) {
+                    formData.append('folder', folder);
+                }
+
+                try {
+                    const response = await fetch(
+                        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                        { method: 'POST', body: formData }
+                    );
+
+                    if (response.ok) {
+                        uploaded++;
+                    } else {
+                        const error = await response.json();
+                        console.error('Upload failed:', error);
+                        failed++;
+                    }
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    failed++;
+                }
+
+                // Update progress
+                const percent = Math.round(((i + 1) / selectedFiles.length) * 100);
+                progressBar.style.width = percent + '%';
+            }
+
+            // Done
+            progress.classList.remove('show');
+            selectedFiles = [];
+            preview.innerHTML = '';
+            fileInput.value = '';
+
+            if (failed === 0) {
+                status.textContent = `${uploaded} foto('s) succesvol geupload!`;
+                status.className = 'status success';
+            } else {
+                status.textContent = `${uploaded} geupload, ${failed} mislukt. Controleer je instellingen.`;
+                status.className = 'status error';
+            }
+
+            uploadBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>

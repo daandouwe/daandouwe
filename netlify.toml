@@ -47,8 +47,8 @@
 
 # API redirects for cleaner URLs
 [[redirects]]
-  from = "/api/generate-pass"
-  to = "/.netlify/functions/generate-pass"
+  from = "/api/images"
+  to = "/.netlify/functions/cloudinary-images"
   status = 200
 
 [[redirects]]
