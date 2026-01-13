@@ -30,11 +30,11 @@ exports.handler = async (event, context) => {
     // Fetch images from Cloudinary Admin API
     const images = await fetchCloudinaryImages(cloudName, apiKey, apiSecret, folder);
 
-    // Transform to optimized URLs
+    // Transform to optimized URLs (higher quality settings)
     const imageUrls = images.map(img => ({
-      url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_800/${img.public_id}.${img.format}`,
-      thumbnail: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_400,c_fill/${img.public_id}.${img.format}`,
-      full: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto/${img.public_id}.${img.format}`,
+      url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_90,w_800/${img.public_id}.${img.format}`,
+      thumbnail: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_85,w_400,c_fill/${img.public_id}.${img.format}`,
+      full: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_95/${img.public_id}.${img.format}`,
       id: img.public_id,
       width: img.width,
       height: img.height,
