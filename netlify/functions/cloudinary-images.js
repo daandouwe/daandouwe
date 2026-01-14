@@ -60,7 +60,7 @@ function fetchCloudinaryImages(cloudName, apiKey, apiSecret, folder) {
     const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
     const options = {
       hostname: 'api.cloudinary.com',
-      path: `/v1_1/${cloudName}/resources/image?type=upload&prefix=${folder}/&max_results=100`,
+      path: `/v1_1/${cloudName}/resources/image?type=upload&prefix=${folder}/&max_results=100&context=true`,
       method: 'GET',
       headers: {
         'Authorization': `Basic ${auth}`,
@@ -74,8 +74,19 @@ function fetchCloudinaryImages(cloudName, apiKey, apiSecret, folder) {
         try {
           const parsed = JSON.parse(data);
           if (parsed.resources) {
-            // Sort by upload date (newest first)
+            // Sort by custom sort_order if available, otherwise by upload date
             const sorted = parsed.resources.sort((a, b) => {
+              const orderA = a.context?.custom?.sort_order;
+              const orderB = b.context?.custom?.sort_order;
+
+              // If both have sort_order, use it
+              if (orderA !== undefined && orderB !== undefined) {
+                return parseInt(orderA) - parseInt(orderB);
+              }
+              // If only one has sort_order, prioritize it
+              if (orderA !== undefined) return -1;
+              if (orderB !== undefined) return 1;
+              // Fall back to upload date (newest first)
               return new Date(b.created_at) - new Date(a.created_at);
             });
             resolve(sorted);

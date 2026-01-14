@@ -255,6 +255,39 @@
             font-size: 14px;
             margin-bottom: 15px;
         }
+        .image-card.dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+        }
+        .image-card.drag-over {
+            border: 2px dashed #063B40;
+        }
+        .image-card {
+            cursor: grab;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .image-card:active {
+            cursor: grabbing;
+        }
+        .order-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .order-buttons .btn {
+            flex: 1;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .order-changed {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -302,9 +335,17 @@
             <button class="btn" id="uploadBtn" disabled>Upload Foto's</button>
 
             <h2>Bestaande foto's</h2>
+            <p style="color: #666; font-size: 14px;">Sleep foto's om de volgorde te wijzigen</p>
             <div class="image-count" id="imageCount"></div>
+            <div class="order-changed" id="orderChanged" style="display: none;">
+                Volgorde gewijzigd - vergeet niet op te slaan!
+            </div>
             <div class="existing-images" id="existingImages">
                 <div class="loading">Laden...</div>
+            </div>
+            <div class="order-buttons" id="orderButtons" style="display: none;">
+                <button class="btn" id="saveOrderBtn">Volgorde Opslaan</button>
+                <button class="btn btn-secondary" id="resetOrderBtn">Annuleren</button>
             </div>
             <button class="btn btn-danger" id="deleteAllBtn" style="margin-top: 20px; display: none;">Alles Verwijderen</button>
 
@@ -386,8 +427,14 @@
         const existingImagesContainer = document.getElementById('existingImages');
         const imageCount = document.getElementById('imageCount');
         const deleteAllBtn = document.getElementById('deleteAllBtn');
+        const orderButtons = document.getElementById('orderButtons');
+        const saveOrderBtn = document.getElementById('saveOrderBtn');
+        const resetOrderBtn = document.getElementById('resetOrderBtn');
+        const orderChanged = document.getElementById('orderChanged');
 
         let allImages = [];
+        let originalOrder = [];
+        let orderHasChanged = false;
 
         let selectedFiles = [];
 
@@ -538,6 +585,10 @@
 
         function renderExistingImages(images) {
             allImages = images;
+            originalOrder = images.map(img => img.id);
+            orderHasChanged = false;
+            orderChanged.style.display = 'none';
+            orderButtons.style.display = 'none';
             imageCount.textContent = `${images.length} foto('s) in portfolio`;
 
             if (images.length === 0) {
@@ -547,13 +598,86 @@
             }
 
             deleteAllBtn.style.display = 'block';
-            existingImagesContainer.innerHTML = images.map(img => `
-                <div class="image-card" data-id="${img.id}">
-                    <img src="${img.thumbnail}" alt="Portfolio image">
+            existingImagesContainer.innerHTML = images.map((img, index) => `
+                <div class="image-card" data-id="${img.id}" data-index="${index}" draggable="true">
+                    <img src="${img.thumbnail}" alt="Portfolio image" draggable="false">
                     <button class="delete-btn" onclick="deleteImage('${img.id}')" title="Verwijderen">&times;</button>
                     <div class="image-name">${img.id.split('/').pop()}</div>
                 </div>
             `).join('');
+
+            // Add drag-and-drop event listeners
+            setupDragAndDrop();
+        }
+
+        function setupDragAndDrop() {
+            const cards = document.querySelectorAll('.image-card');
+            let draggedCard = null;
+
+            cards.forEach(card => {
+                card.addEventListener('dragstart', (e) => {
+                    draggedCard = card;
+                    card.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                    draggedCard = null;
+                    document.querySelectorAll('.image-card').forEach(c => c.classList.remove('drag-over'));
+                });
+
+                card.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    if (draggedCard && draggedCard !== card) {
+                        card.classList.add('drag-over');
+                    }
+                });
+
+                card.addEventListener('dragleave', () => {
+                    card.classList.remove('drag-over');
+                });
+
+                card.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    card.classList.remove('drag-over');
+
+                    if (draggedCard && draggedCard !== card) {
+                        const container = existingImagesContainer;
+                        const allCards = [...container.querySelectorAll('.image-card')];
+                        const draggedIndex = allCards.indexOf(draggedCard);
+                        const targetIndex = allCards.indexOf(card);
+
+                        if (draggedIndex < targetIndex) {
+                            card.after(draggedCard);
+                        } else {
+                            card.before(draggedCard);
+                        }
+
+                        updateImageOrder();
+                    }
+                });
+            });
+        }
+
+        function updateImageOrder() {
+            const cards = [...existingImagesContainer.querySelectorAll('.image-card')];
+            const newOrder = cards.map(card => card.dataset.id);
+
+            // Check if order changed
+            orderHasChanged = !originalOrder.every((id, i) => id === newOrder[i]);
+
+            if (orderHasChanged) {
+                orderChanged.style.display = 'block';
+                orderButtons.style.display = 'flex';
+            } else {
+                orderChanged.style.display = 'none';
+                orderButtons.style.display = 'none';
+            }
+
+            // Update allImages array to match new order
+            allImages = newOrder.map(id => allImages.find(img => img.id === id));
         }
 
         // Delete image
@@ -603,6 +727,41 @@
 
         // Make deleteImage available globally
         window.deleteImage = deleteImage;
+
+        // Save order button
+        saveOrderBtn.addEventListener('click', async () => {
+            saveOrderBtn.disabled = true;
+            saveOrderBtn.textContent = 'Opslaan...';
+
+            try {
+                const response = await fetch('/api/update-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ images: allImages })
+                });
+
+                if (response.ok) {
+                    originalOrder = allImages.map(img => img.id);
+                    orderHasChanged = false;
+                    orderChanged.style.display = 'none';
+                    orderButtons.style.display = 'none';
+                    alert('Volgorde opgeslagen!');
+                } else {
+                    alert('Opslaan mislukt. Probeer opnieuw.');
+                }
+            } catch (error) {
+                console.error('Save order error:', error);
+                alert('Opslaan mislukt. Probeer opnieuw.');
+            }
+
+            saveOrderBtn.disabled = false;
+            saveOrderBtn.textContent = 'Volgorde Opslaan';
+        });
+
+        // Reset order button
+        resetOrderBtn.addEventListener('click', () => {
+            loadExistingImages();
+        });
 
         // Delete all images
         deleteAllBtn.addEventListener('click', async () => {
